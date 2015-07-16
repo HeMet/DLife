@@ -17,10 +17,10 @@
       location = "group:Carthage/Checkouts/Box/Box.xcodeproj">
    </FileRef>
    <FileRef
-      location = "group:Carthage/Checkouts/MVVMKit/MVVMKit.xcodeproj">
+      location = "group:Carthage/Checkouts/ReactiveCocoa/ReactiveCocoa.xcodeproj">
    </FileRef>
    <FileRef
-      location = "group:Carthage/Checkouts/ReactiveCocoa/ReactiveCocoa.xcodeproj">
+      location = "group:Carthage/Checkouts/MVVMKit/MVVMKit.xcodeproj">
    </FileRef>
    <FileRef
       location = "group:DLife.xcodeproj">
