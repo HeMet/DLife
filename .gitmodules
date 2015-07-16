@@ -1,0 +1,21 @@
+[submodule "Carthage/Checkouts/Alamofire"]
+	path = Carthage/Checkouts/Alamofire
+	url = https://github.com/Alamofire/Alamofire.git
+[submodule "Carthage/Checkouts/Box"]
+	path = Carthage/Checkouts/Box
+	url = https://github.com/robrix/Box.git
+[submodule "Carthage/Checkouts/Cartography"]
+	path = Carthage/Checkouts/Cartography
+	url = https://github.com/robb/Cartography.git
+[submodule "Carthage/Checkouts/SDWebImage"]
+	path = Carthage/Checkouts/SDWebImage
+	url = https://github.com/HeMet/SDWebImage.git
+[submodule "Carthage/Checkouts/MVVMKit"]
+	path = Carthage/Checkouts/MVVMKit
+	url = https://github.com/HeMet/MVVMKit.git
+[submodule "Carthage/Checkouts/Result"]
+	path = Carthage/Checkouts/Result
+	url = https://github.com/antitypical/Result.git
+[submodule "Carthage/Checkouts/ReactiveCocoa"]
+	path = Carthage/Checkouts/ReactiveCocoa
+	url = https://github.com/ReactiveCocoa/ReactiveCocoa.git
