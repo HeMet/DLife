@@ -1,6 +1,6 @@
 # DLife
 
-Mobile client for `developerslife.ru`
+Mobile client for [developerslife.ru](http://developerslife.ru)
 
 Features:
 
