@@ -12,13 +12,14 @@ import Box
 import WebImage
 
 enum FeedCategory: Printable {
-    case Latest, Hot, Top
+    case Latest, Hot, Top, Favorite
     
     var description: String {
         switch self {
         case .Hot: return "hot"
         case .Latest: return "latest"
         case .Top: return "top"
+        case .Favorite: return "favorite"
         }
     }
 }

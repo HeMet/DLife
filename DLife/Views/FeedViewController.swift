@@ -65,6 +65,8 @@ class FeedViewController : UITableViewController, SBViewForViewModel, UITableVie
             viewModel.category = .Top
         case 2:
             viewModel.category = .Hot
+        case 3:
+            viewModel.category = .Favorite
         default:
             break
         }

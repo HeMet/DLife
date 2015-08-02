@@ -2,58 +2,36 @@
 //  EntryViewModel.swift
 //  DLife
 //
-//  Created by Евгений Губин on 16.06.15.
+//  Created by Евгений Губин on 28.07.15.
 //  Copyright (c) 2015 GitHub. All rights reserved.
 //
 
 import Foundation
-import MVVMKit
 
 class EntryViewModel: BaseViewModel {
-    
-    var data = ObservableArray<AnyObject>()
-    
-    var currentEntry: DLEntry {
-        didSet {
-            onEntryChanged?()
-            loadComments()
-        }
-    }
-    
-    var comments: ObservableArray<DLComment> = []
-    
-    var onEntryChanged: (() -> ())?
-    
-    private let api = DevsLifeAPI()
+    let entry: DLEntry
     
     init(entry: DLEntry) {
-        currentEntry = entry
-        super.init()
+        self.entry = entry
     }
     
-    func nextRandomPost() {
-        api.getRandomEntry { [unowned self] result in
-            switch result {
-            case .OK(let box):
-                self.currentEntry = box.value
-            case .Error(let error):
-                println(error)
+    var isFavorite: Bool {
+        get {
+            return FavoritesManager.sharedInstance.isFavorite(entry)
+        }
+        set {
+            if newValue {
+                FavoritesManager.sharedInstance.add(entry)
+            } else {
+                FavoritesManager.sharedInstance.remove(entry)
             }
+            onFavoriteChanged?()
         }
     }
     
-    func loadComments() {
-        api.getComments(currentEntry.id) { [unowned self] result in
-            switch result {
-            case .OK(let box):
-                self.comments.replaceAll(box.value)
-            case .Error(let error):
-                println(error)
-            }
-        }
-    }
+    var onFavoriteChanged: (() -> ())?
     
-    deinit {
-        println("dispose EVM")
+    func toggleFavorite() {
+        isFavorite = !isFavorite
     }
 }

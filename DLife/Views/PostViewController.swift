@@ -9,12 +9,12 @@
 import UIKit
 import MVVMKit
 
-class EntryViewController: UITableViewController, SBViewForViewModel, UITableViewDelegate {
-    static let sbInfo = (sbID: "Main", viewID: "EntryViewController2")
+class PostViewController: UITableViewController, SBViewForViewModel, UITableViewDelegate {
+    static let sbInfo = (sbID: "Main", viewID: "PostViewController")
     
-    let cbTag = "EntryViewController"
+    let cbTag = "PostViewController"
     
-    var viewModel: EntryViewModel!
+    var viewModel: PostViewModel!
     var adapter: TableViewAdapter!
     
     var htmlTexts: [NSAttributedString?] = []
@@ -31,7 +31,7 @@ class EntryViewController: UITableViewController, SBViewForViewModel, UITableVie
         
         adapter.cells.register(EntryCellView.self)
         adapter.cells.register(CommentCellView.self)
-        adapter.cells.onWillBind = unowned(self, EntryViewController.handleWillBindCell)
+        adapter.cells.onWillBind = unowned(self, PostViewController.handleWillBindCell)
         adapter.cells.onDidBind = { cell, path in
             cell.setNeedsUpdateConstraints()
             cell.updateConstraintsIfNeeded()
@@ -47,18 +47,18 @@ class EntryViewController: UITableViewController, SBViewForViewModel, UITableVie
         
         viewModel.onEntryChanged = { [unowned self] in
             self.adapter.setData(self.viewModel.currentEntry, forSectionAtIndex: 0)
-            self.navigationItem.title = "Entry\(self.viewModel.currentEntry.id)"
+            self.navigationItem.title = "Entry\(self.viewModel.currentEntry.entry.id)"
         }
         
-        viewModel.comments.onBatchUpdate.register(cbTag, listener: unowned(self, EntryViewController.parseCommentsTextAndUpdate))
-        navigationItem.title = "Entry\(viewModel.currentEntry.id)"
+        viewModel.comments.onBatchUpdate.register(cbTag, listener: unowned(self, PostViewController.parseCommentsTextAndUpdate))
+        navigationItem.title = "Entry\(viewModel.currentEntry.entry.id)"
     }
     
     func parseCommentsTextAndUpdate(comments: ObservableArray<DLComment>, phase: UpdatePhase) {
         switch phase {
         case .Begin:
-            self.adapter.beginUpdate()
-            self.commentsProxy.removeAll(false)
+            adapter.beginUpdate()
+            commentsProxy.removeAll(false)
         case .End:
             let copy = ObservableArray(observableArray: comments)
             backgroundTask {
@@ -75,7 +75,7 @@ class EntryViewController: UITableViewController, SBViewForViewModel, UITableVie
     func handleWillBindCell(cell: UITableViewCell, path: NSIndexPath) {
         switch cell {
         case let commentCell as CommentCellView:
-            commentCell.tvMessage.attributedText = self.htmlTexts[path.row]
+            commentCell.lblMessage.attributedText = self.htmlTexts[path.row]
         case let entryCell as EntryCellView:
             entryCell.entryView.instantGifLoading = true
         default:

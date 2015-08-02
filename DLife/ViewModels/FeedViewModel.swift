@@ -10,7 +10,7 @@ import Foundation
 import MVVMKit
 
 class FeedViewModel: ViewModel {
-    var entries = ObservableArray<DLEntry>()
+    var entries = ObservableArray<EntryViewModel>()
     var feedToken = FeedToken(category: .Latest, pageSize: 10)
     var category = FeedCategory.Latest {
         didSet {
@@ -22,15 +22,24 @@ class FeedViewModel: ViewModel {
     var onDisposed: ViewModelEventHandler?
     
     func loadEntries() {
+        if feedToken.category == .Favorite {
+            loadFavorites()
+        } else {
+            loadFromServer()
+        }
+    }
+    
+    func loadFromServer() {
         let api = DevsLifeAPI()
         let append = feedToken.isUsed
         api.getEntries(feedToken) { result in
             switch result {
             case .OK(let boxedData):
+                let newVMs = boxedData.value.map { EntryViewModel(entry: $0) }
                 if append {
-                    self.entries.extend(boxedData.value)
+                    self.entries.extend(newVMs)
                 } else {
-                    self.entries.replaceAll(boxedData.value)
+                    self.entries.replaceAll(newVMs)
                 }
                 self.onDataChanged?()
             case .Error(let error):
@@ -39,9 +48,17 @@ class FeedViewModel: ViewModel {
         }
     }
     
+    func loadFavorites() {
+        if (!feedToken.isUsed) {
+            let favs = FavoritesManager.sharedInstance.favorites.map { EntryViewModel(entry: $0) }
+            entries.replaceAll(favs)
+            feedToken.next()
+        }
+    }
+    
     func showEntryAtIndex(index: Int) {
-        let entry = entries[index]
-        GoTo.entry(sender: self)(EntryViewModel(entry: entry))
+        let entry = entries[index].entry
+        GoTo.post(sender: self)(PostViewModel(entry: entry))
     }
     
     func dispose() {

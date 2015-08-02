@@ -15,7 +15,7 @@ class CommentCellView: UITableViewCell, ViewForViewModel, BindableCellView {
     var viewModel: DLComment!
     
     @IBOutlet weak var lblHeader: UILabel!
-    @IBOutlet weak var tvMessage: UITextView!
+    @IBOutlet weak var lblMessage: UILabel!
     
     func bindToViewModel() {
         lblHeader.text = "@rating: \(viewModel.voteCount) @author: \(viewModel.authorName) @date: \(viewModel.date)"

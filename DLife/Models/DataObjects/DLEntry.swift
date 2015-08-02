@@ -8,11 +8,15 @@
 
 import Foundation
 
-class DLEntry {
+class DLEntry: Equatable {
     var id: Int!
     var description: String!
     var votes: Int!
     var gifURL: String!
     var previewURL: String!
     var imgSize: (Float, Float) = (10.0, 10.0)
+}
+
+func ==(lhs: DLEntry, rhs: DLEntry) -> Bool {
+    return lhs.id == rhs.id
 }

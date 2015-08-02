@@ -20,8 +20,9 @@ class EntryView: UIView, ViewForViewModel {
     var lblDescription: UILabel = UILabel()
     var lblRating: UILabel = UILabel()
     var lblRatingValue: UILabel = UILabel()
+    var btnFavorite: UIButton = UIButton()
     
-    var viewModel: DLEntry! {
+    var viewModel: EntryViewModel! {
         didSet {
             #if TARGET_INTERFACE_BUILDER
             bindToViewModel()
@@ -35,21 +36,21 @@ class EntryView: UIView, ViewForViewModel {
     
     @IBInspectable var picture: UIImage? {
         didSet {
-            viewModel.previewURL = designer_image
+            viewModel.entry.previewURL = designer_image
             bindToViewModel()
         }
     }
     
     @IBInspectable var title: String = "Description" {
         didSet {
-            viewModel.description = title
+            viewModel.entry.description = title
             bindToViewModel()
         }
     }
     
     @IBInspectable var ratingValue: Int = 0 {
         didSet {
-            viewModel.votes = ratingValue
+            viewModel.entry.votes = ratingValue
             bindToViewModel()
         }
     }
@@ -69,6 +70,15 @@ class EntryView: UIView, ViewForViewModel {
         }
         set {
             loadingOverlay.percentage = newValue
+        }
+    }
+    
+    @IBInspectable var isFavorite: Bool {
+        get {
+            return btnFavorite.selected
+        }
+        set {
+            btnFavorite.selected = newValue
         }
     }
     
@@ -99,12 +109,13 @@ class EntryView: UIView, ViewForViewModel {
         loadingOverlay.hidden = true
         
         let dvm = DLEntry()
+        dvm.id = -1
         dvm.description = "Descriptions"
         dvm.votes = 9000
         dvm.previewURL = placeholder_image
         dvm.imgSize = (50, 50)
         
-        viewModel = dvm
+        viewModel = EntryViewModel(entry: dvm)
     }
     
     func setupHierarchy() {
@@ -112,6 +123,7 @@ class EntryView: UIView, ViewForViewModel {
         addSubview(imgPicture)
         addSubview(lblRating)
         addSubview(lblRatingValue)
+        addSubview(btnFavorite)
         
         imgPicture.layer.addSublayer(loadingOverlay)
         
@@ -120,6 +132,10 @@ class EntryView: UIView, ViewForViewModel {
         imgPicture.userInteractionEnabled = true
         
         lblDescription.numberOfLines = 0
+        
+        btnFavorite.setImage(UIImage(named: "favorites_normal"), forState: .Normal)
+        btnFavorite.setImage(UIImage(named: "favorites_checked"), forState: .Selected)
+        btnFavorite.addTarget(self, action: Selector("handleFavoriteTap"), forControlEvents: .TouchUpInside)
     }
     
     func setupLayout() {
@@ -133,16 +149,19 @@ class EntryView: UIView, ViewForViewModel {
             pic.top == desc.bottom + 16
             pic.centerX == pic.superview!.centerX
             
-            rating.top == pic.bottom + 16
+            rating.top == pic.bottom + 12
         }
         
-        constrain(lblRating, lblRatingValue) { rating, value in
+        constrain(lblRating, lblRatingValue, btnFavorite) { rating, value, favorite in
             value.right == value.superview!.right - 8
-            value.bottom == value.superview!.bottom - 8
+            value.bottom == value.superview!.bottom - 12
             
             rating.right == value.left - 8
             rating.baseline == value.baseline
-            rating.left >= value.superview!.left + 8
+            
+            favorite.right == rating.left - 8
+            favorite.centerY == rating.centerY
+            favorite.left >= favorite.superview!.left + 8
         }
     }
     
@@ -153,18 +172,29 @@ class EntryView: UIView, ViewForViewModel {
     }
     
     func bindToViewModel() {
-        lblDescription.text = viewModel.description
-        lblRatingValue.text = "\(viewModel.votes)"
+        lblDescription.text = viewModel.entry.description
+        lblRatingValue.text = "\(viewModel.entry.votes)"
         updatePicture()
+        
+        #if !TARGET_INTERFACE_BUILDER
+        btnFavorite.selected = viewModel.isFavorite
+        viewModel.onFavoriteChanged = { [unowned self] in
+            self.btnFavorite.selected = self.viewModel.isFavorite
+        }
+        #endif
     }
     
     func handlePictureTap(recognizer: UITapGestureRecognizer) {
         loadGif(imgPicture.image!)
     }
     
+    func handleFavoriteTap() {
+        viewModel.toggleFavorite()
+    }
+    
     func loadPreview() {
-        let ph = placeholderImage(viewModel.imgSize.0, viewModel.imgSize.1)
-        imgPicture.sd_setImageWithURL(NSURL(string: viewModel.previewURL), placeholderImage: ph) { img, _, _, _ in
+        let ph = placeholderImage(viewModel.entry.imgSize.0, viewModel.entry.imgSize.1)
+        imgPicture.sd_setImageWithURL(NSURL(string: viewModel.entry.previewURL), placeholderImage: ph) { img, _, _, _ in
             if (self.instantGifLoading) {
                 // Workaround: in some cases (first load in our case) completition block is not called
                 NSTimer.schedule(delay: 0.1) { _ in
@@ -175,10 +205,10 @@ class EntryView: UIView, ViewForViewModel {
     }
     
     func loadGif(preview: UIImage) {
-        if !self.viewModel.gifURL.isEmpty {
+        if !self.viewModel.entry.gifURL.isEmpty {
             loadingOverlay.hidden = false
             
-            imgPicture.sd_setImageWithURL(NSURL(string: self.viewModel.gifURL),
+            imgPicture.sd_setImageWithURL(NSURL(string: self.viewModel.entry.gifURL),
                 placeholderImage: preview,
                 options: SDWebImageOptions(0),
                 progress: { receivedSize, expectedSize in
@@ -190,9 +220,9 @@ class EntryView: UIView, ViewForViewModel {
     }
     
     func updatePicture() {
-        switch viewModel.previewURL {
+        switch viewModel.entry.previewURL {
         case placeholder_image:
-            imgPicture.image = placeholderImage(viewModel.imgSize.0, viewModel.imgSize.1, transparent: false)
+            imgPicture.image = placeholderImage(viewModel.entry.imgSize.0, viewModel.entry.imgSize.1, transparent: false)
         case designer_image:
             imgPicture.image = picture
         default:

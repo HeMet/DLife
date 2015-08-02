@@ -19,6 +19,16 @@ extension DLEntry {
         gifURL = json["gifURL"] as? String ?? ""
         previewURL = json["previewURL"] as! String
     }
+    
+    func toJson() -> [String: AnyObject] {
+        return [
+            "id": id,
+            "description": description,
+            "votes": votes,
+            "gifURL": gifURL,
+            "previewURL": previewURL
+            ]
+    }
 }
 
 extension DLComment {

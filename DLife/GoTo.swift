@@ -11,5 +11,5 @@ import MVVMKit
 
 struct GoTo {
     static let root = present(!FeedViewController.self).withinNavView().asRoot()
-    static let entry = present(!EntryViewController.self).withTransition(Transitions.show)
+    static let post = present(!PostViewController.self).withTransition(Transitions.show)
 }

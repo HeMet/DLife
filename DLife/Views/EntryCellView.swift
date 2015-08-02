@@ -19,7 +19,7 @@ class EntryCellView: UITableViewCell, ViewForViewModel, BindableCellView, NibSou
 
     @IBOutlet weak var entryView: EntryView!
     
-    var viewModel: DLEntry! {
+    var viewModel: EntryViewModel! {
         get {
             return entryView.viewModel
         }

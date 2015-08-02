@@ -45,12 +45,13 @@
                     <navigationItem key="navigationItem" id="paj-iW-SE1">
                         <nil key="title"/>
                         <segmentedControl key="titleView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="bar" selectedSegmentIndex="0" id="Nvf-4r-rPv">
-                            <rect key="frame" x="142" y="7" width="317" height="30"/>
+                            <rect key="frame" x="93" y="7" width="415" height="30"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <segments>
                                 <segment title="Последнее"/>
                                 <segment title="Лучшее"/>
                                 <segment title="Обсуждаемое"/>
+                                <segment title="Любимое"/>
                             </segments>
                             <connections>
                                 <action selector="handleCategoryChanged:" destination="tx9-Ph-vYr" eventType="valueChanged" id="79X-MO-DS3"/>
@@ -66,7 +67,7 @@
         <!--Entry777-->
         <scene sceneID="ftV-TE-54X">
             <objects>
-                <tableViewController storyboardIdentifier="EntryViewController2" id="6TA-qZ-399" customClass="EntryViewController" customModule="DLife" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="PostViewController" id="6TA-qZ-399" customClass="PostViewController" customModule="DLife" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="b2p-Xy-U14">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -83,33 +84,33 @@
                                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" verticalCompressionResistancePriority="749" bounces="NO" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" editable="NO" usesAttributedText="YES" translatesAutoresizingMaskIntoConstraints="NO" id="EU8-B5-xEE">
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mxH-v2-b4x">
                                             <rect key="frame" x="8" y="45" width="584" height="26"/>
-                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                             <attributedString key="attributedText">
-                                                <fragment content="Lorem ipsum dolor sit er elit lamet...">
+                                                <fragment content="Placeholder for a comment...">
                                                     <attributes>
-                                                        <font key="NSFont" size="14" name="HelveticaNeue"/>
+                                                        <color key="NSColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                        <font key="NSFont" size="17" name="HelveticaNeue"/>
                                                         <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural"/>
                                                     </attributes>
                                                 </fragment>
                                             </attributedString>
-                                            <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                                        </textView>
+                                            <nil key="highlightedColor"/>
+                                        </label>
                                     </subviews>
                                     <constraints>
+                                        <constraint firstAttribute="trailing" secondItem="mxH-v2-b4x" secondAttribute="trailing" priority="999" constant="8" id="5c5-eE-g6B"/>
+                                        <constraint firstItem="mxH-v2-b4x" firstAttribute="leading" secondItem="jqt-4Y-L6r" secondAttribute="leading" constant="8" id="67E-06-onH"/>
+                                        <constraint firstAttribute="bottom" secondItem="mxH-v2-b4x" secondAttribute="bottom" priority="999" constant="8" id="8d4-Ac-Znz"/>
                                         <constraint firstAttribute="trailing" secondItem="bum-KB-U2t" secondAttribute="trailing" priority="999" constant="8" id="8pd-nQ-xV1"/>
-                                        <constraint firstItem="EU8-B5-xEE" firstAttribute="leading" secondItem="jqt-4Y-L6r" secondAttribute="leading" constant="8" id="BG2-nD-fa6"/>
-                                        <constraint firstItem="EU8-B5-xEE" firstAttribute="top" secondItem="bum-KB-U2t" secondAttribute="bottom" constant="16" id="ISf-AH-Rge"/>
-                                        <constraint firstAttribute="bottom" secondItem="EU8-B5-xEE" secondAttribute="bottom" priority="999" constant="8" id="LKi-hw-oUu"/>
                                         <constraint firstItem="bum-KB-U2t" firstAttribute="top" secondItem="jqt-4Y-L6r" secondAttribute="top" constant="8" id="rFN-gk-MwK"/>
+                                        <constraint firstItem="mxH-v2-b4x" firstAttribute="top" secondItem="bum-KB-U2t" secondAttribute="bottom" constant="16" id="wCo-gj-qFr"/>
                                         <constraint firstItem="bum-KB-U2t" firstAttribute="leading" secondItem="jqt-4Y-L6r" secondAttribute="leading" constant="8" id="xXY-Bu-ZJS"/>
-                                        <constraint firstAttribute="trailing" secondItem="EU8-B5-xEE" secondAttribute="trailing" priority="999" constant="8" id="yP1-FK-iHS"/>
                                     </constraints>
                                 </tableViewCellContentView>
                                 <connections>
                                     <outlet property="lblHeader" destination="bum-KB-U2t" id="lL3-Zk-SkY"/>
-                                    <outlet property="tvMessage" destination="EU8-B5-xEE" id="EY2-1r-0hj"/>
+                                    <outlet property="lblMessage" destination="mxH-v2-b4x" id="DJ6-T7-otj"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -156,8 +157,17 @@
                                     <userDefinedRuntimeAttribute type="boolean" keyPath="overlay" value="YES"/>
                                 </userDefinedRuntimeAttributes>
                             </view>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DdJ-Kf-v4O">
+                                <rect key="frame" x="164" y="484" width="32" height="32"/>
+                                <color key="tintColor" red="0.32941176470588235" green="0.56862745098039214" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <state key="normal" image="favorites_normal">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <state key="selected" image="favorites_checked"/>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="tintColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="0ya-AE-8NH" secondAttribute="trailing" id="3cm-tt-woF"/>
                             <constraint firstAttribute="centerY" secondItem="0ya-AE-8NH" secondAttribute="centerY" id="5AS-kS-fPC"/>
@@ -176,4 +186,8 @@
             <point key="canvasLocation" x="404" y="668"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="favorites_checked" width="32" height="31"/>
+        <image name="favorites_normal" width="32" height="31"/>
+    </resources>
 </document>
