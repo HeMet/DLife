@@ -24,4 +24,11 @@ class CommentCellView: UITableViewCell, ViewForViewModel, BindableCellView {
 
         // Workaround: bottom and right constraint's priorities are setted to 999 because of UIView-Encapsulated-Layout-... bug
     }
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        
+        lblHeader.preferredMaxLayoutWidth = self.bounds.width - 16
+        lblMessage.preferredMaxLayoutWidth = self.bounds.width - 16
+    }
 }

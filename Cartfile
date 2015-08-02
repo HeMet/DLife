@@ -1,4 +1,4 @@
 github "HeMet/SDWebImage" "master"
 github "robb/Cartography" "master"
 github "Alamofire/Alamofire" >= 1.2
-github "HeMet/MVVMKit" "master"
+github "HeMet/MVVMKit" "develop"

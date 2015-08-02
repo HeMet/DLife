@@ -31,4 +31,8 @@ class EntryCellView: UITableViewCell, ViewForViewModel, BindableCellView, NibSou
     func bindToViewModel() {
         entryView.bindToViewModel()
     }
+    
+    func setActive(active: Bool) {
+        entryView.setActive(active)
+    }
 }

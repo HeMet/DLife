@@ -21,12 +21,7 @@ class PostViewController: UITableViewController, SBViewForViewModel, UITableView
     var commentsProxy: ObservableArray<DLComment> = []
     
     func bindToViewModel() {
-        tableView.estimatedRowHeight = 50
-        tableView.rowHeight = UITableViewAutomaticDimension
-        tableView.estimatedSectionHeaderHeight = 20
-        tableView.sectionHeaderHeight = UITableViewAutomaticDimension
-        
-        adapter = TableViewAdapter(tableView: tableView)
+        adapter = TableViewAdapter(tableView: tableView, rowHeightMode: .TemplateCell)
         adapter.delegate = self
         
         adapter.cells.register(EntryCellView.self)
@@ -43,6 +38,7 @@ class PostViewController: UITableViewController, SBViewForViewModel, UITableView
         adapter.setData(viewModel.currentEntry, forSectionAtIndex: 0)
         adapter.setData(commentsProxy, forSectionAtIndex: 1)
         adapter.setTitle("Комментарии:", forSection: .Header, atIndex: 1)
+        println("end update")
         adapter.endUpdate()
         
         viewModel.onEntryChanged = { [unowned self] in
@@ -61,14 +57,10 @@ class PostViewController: UITableViewController, SBViewForViewModel, UITableView
             commentsProxy.removeAll(false)
         case .End:
             let copy = ObservableArray(observableArray: comments)
-            backgroundTask {
-                var htmls = map(copy) { parseCommentText($0.text) }
-                uiTask {
-                    self.htmlTexts = htmls
-                    self.commentsProxy.replaceAll(comments)
-                    self.adapter.endUpdate()
-                }
-            }
+            htmlTexts = map(copy) { parseCommentText($0.text) }
+            commentsProxy.replaceAll(comments)
+            println("end update (comments)")
+            adapter.endUpdate()
         }
     }
     
@@ -95,6 +87,18 @@ class PostViewController: UITableViewController, SBViewForViewModel, UITableView
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         viewModel.loadComments()
+    }
+    
+    override func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
+        if let ec = cell as? EntryCellView {
+            ec.setActive(true)
+        }
+    }
+    
+    override func tableView(tableView: UITableView, didEndDisplayingCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
+        if let ec = cell as? EntryCellView {
+            ec.setActive(false)
+        }
     }
     
     deinit {

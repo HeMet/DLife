@@ -54,6 +54,15 @@ class FeedViewController : UITableViewController, SBViewForViewModel, UITableVie
         if indexPath.row == viewModel.entries.endIndex - 1 {
             self.viewModel.loadEntries()
         }
+        if let ec = cell as? EntryCellView {
+            ec.setActive(true)
+        }
+    }
+    
+    override func tableView(tableView: UITableView, didEndDisplayingCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
+        if let ec = cell as? EntryCellView {
+            ec.setActive(false)
+        }
     }
     
     @IBAction func handleCategoryChanged(sender: AnyObject) {

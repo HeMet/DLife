@@ -169,18 +169,20 @@ class EntryView: UIView, ViewForViewModel {
         super.layoutSubviews()
         
         loadingOverlay.frame = imgPicture.layer.bounds
+        lblDescription.preferredMaxLayoutWidth = bounds.width - 16
     }
     
     func bindToViewModel() {
         lblDescription.text = viewModel.entry.description
         lblRatingValue.text = "\(viewModel.entry.votes)"
-        updatePicture()
+        //updatePicture()
+        imgPicture.image = placeholderImage(viewModel.entry.imgSize.0, viewModel.entry.imgSize.1, transparent: false)
         
         #if !TARGET_INTERFACE_BUILDER
-        btnFavorite.selected = viewModel.isFavorite
-        viewModel.onFavoriteChanged = { [unowned self] in
-            self.btnFavorite.selected = self.viewModel.isFavorite
-        }
+//        btnFavorite.selected = viewModel.isFavorite
+//        viewModel.onFavoriteChanged = { [unowned self] in
+//            self.btnFavorite.selected = self.viewModel.isFavorite
+//        }
         #endif
     }
     
@@ -190,9 +192,11 @@ class EntryView: UIView, ViewForViewModel {
     
     func handleFavoriteTap() {
         viewModel.toggleFavorite()
+        btnFavorite.selected = viewModel.isFavorite
     }
     
     func loadPreview() {
+        loadingOverlay.hidden = true
         let ph = placeholderImage(viewModel.entry.imgSize.0, viewModel.entry.imgSize.1)
         imgPicture.sd_setImageWithURL(NSURL(string: viewModel.entry.previewURL), placeholderImage: ph) { img, _, _, _ in
             if (self.instantGifLoading) {
@@ -205,16 +209,20 @@ class EntryView: UIView, ViewForViewModel {
     }
     
     func loadGif(preview: UIImage) {
-        if !self.viewModel.entry.gifURL.isEmpty {
+        if !viewModel.entry.gifURL.isEmpty {
+            println("0")
             loadingOverlay.hidden = false
+            loadingOverlay.percentage = 0
             
             imgPicture.sd_setImageWithURL(NSURL(string: self.viewModel.entry.gifURL),
                 placeholderImage: preview,
                 options: SDWebImageOptions(0),
                 progress: { receivedSize, expectedSize in
                     self.loadingPercentage = CGFloat(receivedSize * 100 / expectedSize)
+                    //println("1")
                 }) { _ in
-                self.loadingOverlay.hidden = true
+                    self.loadingOverlay.hidden = true
+                    println("2")
             }
         }
     }
@@ -243,5 +251,18 @@ class EntryView: UIView, ViewForViewModel {
         let img = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
         return img
+    }
+    
+    func setActive(active: Bool) {
+        if active {
+            btnFavorite.selected = self.viewModel.isFavorite
+            viewModel.onFavoriteChanged = { [unowned self] in
+                self.btnFavorite.selected = self.viewModel.isFavorite
+            }
+            
+            loadPreview()
+        } else {
+            viewModel.onFavoriteChanged = nil
+        }
     }
 }
