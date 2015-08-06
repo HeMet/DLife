@@ -22,6 +22,8 @@ class EntryView: UIView, ViewForViewModel {
     var lblRatingValue: UILabel = UILabel()
     var btnFavorite: UIButton = UIButton()
     
+    var imgRatio = ConstraintGroup()
+    
     var viewModel: EntryViewModel! {
         didSet {
             #if TARGET_INTERFACE_BUILDER
@@ -148,6 +150,8 @@ class EntryView: UIView, ViewForViewModel {
         constrain(lblDescription, imgPicture, lblRatingValue) { desc, pic, rating in
             pic.top == desc.bottom + 16
             pic.centerX == pic.superview!.centerX
+            pic.left >= pic.superview!.left + 8
+            pic.right <= pic.superview!.right - 8
             
             rating.top == pic.bottom + 12
         }
@@ -169,15 +173,13 @@ class EntryView: UIView, ViewForViewModel {
         super.layoutSubviews()
         
         loadingOverlay.frame = imgPicture.layer.bounds
-        lblDescription.preferredMaxLayoutWidth = bounds.width - 16
     }
     
     func bindToViewModel() {
         lblDescription.text = viewModel.entry.description
         lblRatingValue.text = "\(viewModel.entry.votes)"
-        //updatePicture()
         imgPicture.image = placeholderImage(viewModel.entry.imgSize.0, viewModel.entry.imgSize.1, transparent: false)
-        
+        updatePictureRatioConstraint()
         #if !TARGET_INTERFACE_BUILDER
 //        btnFavorite.selected = viewModel.isFavorite
 //        viewModel.onFavoriteChanged = { [unowned self] in
@@ -210,7 +212,6 @@ class EntryView: UIView, ViewForViewModel {
     
     func loadGif(preview: UIImage) {
         if !viewModel.entry.gifURL.isEmpty {
-            println("0")
             loadingOverlay.hidden = false
             loadingOverlay.percentage = 0
             
@@ -219,10 +220,8 @@ class EntryView: UIView, ViewForViewModel {
                 options: SDWebImageOptions(0),
                 progress: { receivedSize, expectedSize in
                     self.loadingPercentage = CGFloat(receivedSize * 100 / expectedSize)
-                    //println("1")
                 }) { _ in
                     self.loadingOverlay.hidden = true
-                    println("2")
             }
         }
     }
@@ -235,6 +234,15 @@ class EntryView: UIView, ViewForViewModel {
             imgPicture.image = picture
         default:
             loadPreview()
+        }
+    }
+    
+    func updatePictureRatioConstraint() {
+        let size = imgPicture.image!.size
+        let k = size.height / size.width
+        
+        constrain(imgPicture, replace: imgRatio) { pic in
+            pic.height == k * pic.width
         }
     }
     
