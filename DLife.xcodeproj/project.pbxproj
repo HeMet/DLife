@@ -11,6 +11,8 @@
 		842418531AFF4BE400BAB4C6 /* GoTo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 842418521AFF4BE400BAB4C6 /* GoTo.swift */; };
 		842418551B00DB7400BAB4C6 /* NSTimerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 842418541B00DB7400BAB4C6 /* NSTimerExtension.swift */; };
 		844507CB1B37309000A08A78 /* EntryCellView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 844507CA1B37309000A08A78 /* EntryCellView.xib */; };
+		845974091B7922D9008BC2EE /* AboutViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 845974081B7922D9008BC2EE /* AboutViewModel.swift */; };
+		8459740B1B79233B008BC2EE /* AboutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8459740A1B79233B008BC2EE /* AboutViewController.swift */; };
 		845E5DB41B2B135500D44299 /* WebImage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 845E5DB31B2B135500D44299 /* WebImage.framework */; };
 		845E5DB51B2B135500D44299 /* WebImage.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 845E5DB31B2B135500D44299 /* WebImage.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		845E5DDF1B2B3B1400D44299 /* EntryCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 845E5DDE1B2B3B1400D44299 /* EntryCellView.swift */; };
@@ -85,6 +87,8 @@
 		842418521AFF4BE400BAB4C6 /* GoTo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GoTo.swift; sourceTree = "<group>"; };
 		842418541B00DB7400BAB4C6 /* NSTimerExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NSTimerExtension.swift; path = Misc/NSTimerExtension.swift; sourceTree = "<group>"; };
 		844507CA1B37309000A08A78 /* EntryCellView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = EntryCellView.xib; path = Views/Layouts/EntryCellView.xib; sourceTree = "<group>"; };
+		845974081B7922D9008BC2EE /* AboutViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AboutViewModel.swift; path = ViewModels/AboutViewModel.swift; sourceTree = "<group>"; };
+		8459740A1B79233B008BC2EE /* AboutViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AboutViewController.swift; sourceTree = "<group>"; };
 		845E5DB31B2B135500D44299 /* WebImage.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = WebImage.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		845E5DDE1B2B3B1400D44299 /* EntryCellView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = EntryCellView.swift; path = Views/EntryCellView.swift; sourceTree = "<group>"; };
 		845E5DE01B2B3DB400D44299 /* DevsLifeAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DevsLifeAPI.swift; path = Models/DevsLifeAPI.swift; sourceTree = "<group>"; };
@@ -171,6 +175,7 @@
 				84A57FE81B30A2BF009A560E /* PostViewModel.swift */,
 				84147C811AE175DC001F64B6 /* BaseViewModel.swift */,
 				84A3A9741B680B8B0093BCAE /* EntryViewModel.swift */,
+				845974081B7922D9008BC2EE /* AboutViewModel.swift */,
 			);
 			name = ViewModels;
 			sourceTree = "<group>";
@@ -186,6 +191,7 @@
 				84C51CF81B372B45007C8108 /* PostViewController.swift */,
 				84C51CFA1B372C07007C8108 /* CommentCellView.swift */,
 				84BF931E1B4EC05200E8F0F2 /* LoadingOverlayLayer.swift */,
+				8459740A1B79233B008BC2EE /* AboutViewController.swift */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -395,9 +401,11 @@
 				84A57FE71B30986A009A560E /* DebugUtils.swift in Sources */,
 				846F4CEA1B4CF71600AA9291 /* AsyncUtils.swift in Sources */,
 				84A3A9751B680B8B0093BCAE /* EntryViewModel.swift in Sources */,
+				8459740B1B79233B008BC2EE /* AboutViewController.swift in Sources */,
 				84BF931F1B4EC05200E8F0F2 /* LoadingOverlayLayer.swift in Sources */,
 				845E5DEA1B2B4C9F00D44299 /* Serialization.swift in Sources */,
 				845E5DE81B2B454200D44299 /* FeedViewModel.swift in Sources */,
+				845974091B7922D9008BC2EE /* AboutViewModel.swift in Sources */,
 				845E5DDF1B2B3B1400D44299 /* EntryCellView.swift in Sources */,
 				B67781741AC2B88000D41721 /* DeclarativeUI.swift in Sources */,
 				847BD2C21B65374300F3BC0E /* FavoritesManager.swift in Sources */,

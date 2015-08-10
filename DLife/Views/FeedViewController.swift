@@ -80,4 +80,8 @@ class FeedViewController : UITableViewController, SBViewForViewModel, UITableVie
             break
         }
     }
+    
+    @IBAction func handleAboutTapped(sender: UIBarButtonItem) {
+        viewModel.showAbout()
+    }
 }

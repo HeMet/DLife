@@ -2,6 +2,7 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14E46" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
         <!--Feed View Controller-->
@@ -57,6 +58,11 @@
                                 <action selector="handleCategoryChanged:" destination="tx9-Ph-vYr" eventType="valueChanged" id="79X-MO-DS3"/>
                             </connections>
                         </segmentedControl>
+                        <barButtonItem key="rightBarButtonItem" image="about" id="dyb-Sj-WL0">
+                            <connections>
+                                <action selector="handleAboutTapped:" destination="tx9-Ph-vYr" id="2kj-ud-b0G"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
                 </tableViewController>
@@ -134,6 +140,63 @@
             </objects>
             <point key="canvasLocation" x="1033" y="9"/>
         </scene>
+        <!--About View Controller-->
+        <scene sceneID="MYc-7Z-lYN">
+            <objects>
+                <viewController storyboardIdentifier="AboutViewController" id="Kgl-Ld-a3T" customClass="AboutViewController" customModule="DLife" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="ygI-yg-OUv"/>
+                        <viewControllerLayoutGuide type="bottom" id="qKp-FT-RZe"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="sRa-ga-5gZ">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="DLife" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Tbr-ve-rTp">
+                                <rect key="frame" x="269" y="28" width="63" height="32"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="26"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" editable="NO" usesAttributedText="YES" translatesAutoresizingMaskIntoConstraints="NO" id="2pn-29-iAI">
+                                <rect key="frame" x="156" y="68" width="288" height="240"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <attributedString key="attributedText">
+                                    <fragment>
+                                        <string key="content">Мобильный клиент для  http://developerslife.ru  Разработан при помощи MVVMKit: https://github.com/HeMet/MVVMKit  Исходники: https://github.com/HeMet/DLife  Иконки взяты с http://icons8.com</string>
+                                        <attributes>
+                                            <font key="NSFont" size="17" name="HelveticaNeue"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural"/>
+                                        </attributes>
+                                    </fragment>
+                                </attributedString>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                <dataDetectorType key="dataDetectorTypes" link="YES"/>
+                            </textView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="© Губин Евгений, 2015" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="65N-3n-pdh">
+                                <rect key="frame" x="208" y="559" width="184" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="centerX" secondItem="2pn-29-iAI" secondAttribute="centerX" id="8cC-e5-6TU"/>
+                            <constraint firstItem="2pn-29-iAI" firstAttribute="top" secondItem="Tbr-ve-rTp" secondAttribute="bottom" constant="8" id="Cg9-sS-MCe"/>
+                            <constraint firstItem="65N-3n-pdh" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="sRa-ga-5gZ" secondAttribute="leadingMargin" id="Hl2-CX-Ba0"/>
+                            <constraint firstItem="Tbr-ve-rTp" firstAttribute="top" secondItem="ygI-yg-OUv" secondAttribute="bottom" constant="8" id="Ih4-DL-8Jk"/>
+                            <constraint firstItem="qKp-FT-RZe" firstAttribute="top" secondItem="65N-3n-pdh" secondAttribute="bottom" constant="20" id="UnK-pK-yLB"/>
+                            <constraint firstAttribute="centerX" secondItem="Tbr-ve-rTp" secondAttribute="centerX" id="gcb-v0-RCr"/>
+                            <constraint firstAttribute="centerX" secondItem="65N-3n-pdh" secondAttribute="centerX" id="mqr-P0-6bY"/>
+                            <constraint firstAttribute="trailingMargin" relation="greaterThanOrEqual" secondItem="65N-3n-pdh" secondAttribute="trailing" id="yAE-AO-u3V"/>
+                        </constraints>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="s8b-yC-V76" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1661" y="9"/>
+        </scene>
         <!--View Controller-->
         <scene sceneID="rsO-bC-dBV">
             <objects>
@@ -187,6 +250,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="about" width="33" height="33"/>
         <image name="favorites_checked" width="32" height="31"/>
         <image name="favorites_normal" width="32" height="31"/>
     </resources>

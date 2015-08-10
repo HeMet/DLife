@@ -61,6 +61,10 @@ class FeedViewModel: ViewModel {
         GoTo.post(sender: self)(PostViewModel(entry: entry))
     }
     
+    func showAbout() {
+        GoTo.about(sender: self)(AboutViewModel())
+    }
+    
     func dispose() {
         onDisposed?(self)
     }
