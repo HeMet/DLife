@@ -29,6 +29,20 @@ enum ApiResult<T> {
     case OK(Box<T>)
 }
 
+extension NSError {
+    class var DLifeApiDomain: String {
+        return "DLifeAPI"
+    }
+    
+    static func newApiError(errorCode: DLifeAPIErrorCodes) -> NSError {
+        return NSError(domain: DLifeApiDomain, code: errorCode.rawValue, userInfo: nil)
+    }
+}
+
+enum DLifeAPIErrorCodes: Int {
+    case NotFound = 0
+}
+
 class FeedToken {
     let pageSize: Int
     let category: FeedCategory
@@ -125,6 +139,30 @@ class DevsLifeAPI {
                 
                 self.loadPreviews([entry]) {
                     callback(.OK(Box(entry)))
+                }
+            } else if let error = error {
+                callback(.Error(error))
+            }
+        }
+    }
+    
+    func getEntry(id: String, callback: ApiResult<DLEntry> -> ()) {
+        let params: [String: AnyObject] = [
+            "json": "true",
+            "types": "gif"
+        ]
+        Alamofire.request(.GET, "http://developerslife.ru/\(id)", parameters: params, encoding: .URL).responseJSON { (_, _, data, error) in
+            if  let result = data as? [String: AnyObject] {
+                
+                if let error = result["error"] as? String {
+                    let nsError = NSError.newApiError(.NotFound)
+                    callback(.Error(nsError))
+                } else {
+                    var entry = DLEntry(json: result)
+                    
+                    self.loadPreviews([entry]) {
+                        callback(.OK(Box(entry)))
+                    }
                 }
             } else if let error = error {
                 callback(.Error(error))

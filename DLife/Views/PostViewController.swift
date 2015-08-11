@@ -9,10 +9,12 @@
 import UIKit
 import MVVMKit
 
-class PostViewController: UITableViewController, SBViewForViewModel, UITableViewDelegate {
+class PostViewController: UITableViewController, SBViewForViewModel, UITableViewDelegate, UITextFieldDelegate {
     static let sbInfo = (sbID: "Main", viewID: "PostViewController")
     
     let cbTag = "PostViewController"
+    
+    @IBOutlet weak var tfTitle: UITextField!
     
     var viewModel: PostViewModel!
     var adapter: TableViewAdapter!
@@ -47,7 +49,9 @@ class PostViewController: UITableViewController, SBViewForViewModel, UITableView
         }
         
         viewModel.comments.onBatchUpdate.register(cbTag, listener: unowned(self, PostViewController.parseCommentsTextAndUpdate))
-        navigationItem.title = "Entry\(viewModel.currentEntry.entry.id)"
+        tfTitle.text = "Entry\(viewModel.currentEntry.entry.id)"
+        
+        viewModel.onAlert = handleAlert
     }
     
     func parseCommentsTextAndUpdate(comments: ObservableArray<DLComment>, phase: UpdatePhase) {
@@ -99,6 +103,26 @@ class PostViewController: UITableViewController, SBViewForViewModel, UITableView
         if let ec = cell as? EntryCellView {
             ec.setActive(false)
         }
+    }
+    
+    func textFieldDidBeginEditing(textField: UITextField) {
+        textField.selectedTextRange = textField.textRangeFromPosition(textField.beginningOfDocument, toPosition: textField.endOfDocument)
+    }
+    
+    func textFieldShouldReturn(textField: UITextField) -> Bool {
+        if let idNumber = tfTitle.text.toInt() {
+            textField.text = "Entry\(idNumber)"
+            textField.resignFirstResponder()
+            
+            viewModel.showPost("\(idNumber)")
+            
+            return true
+        }
+        return false
+    }
+    
+    func handleAlert(text: String) {
+        UIAlertView(title: nil, message: text, delegate: nil, cancelButtonTitle: "Ну, ок...").show()
     }
     
     deinit {

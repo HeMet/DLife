@@ -70,7 +70,7 @@
             </objects>
             <point key="canvasLocation" x="404" y="9"/>
         </scene>
-        <!--Entry777-->
+        <!--Post View Controller-->
         <scene sceneID="ftV-TE-54X">
             <objects>
                 <tableViewController storyboardIdentifier="PostViewController" id="6TA-qZ-399" customClass="PostViewController" customModule="DLife" customModuleProvider="target" sceneMemberID="viewController">
@@ -128,13 +128,26 @@
                             </connections>
                         </barButtonItem>
                     </toolbarItems>
-                    <navigationItem key="navigationItem" title="Entry777" id="pp2-FR-rSr">
+                    <navigationItem key="navigationItem" id="pp2-FR-rSr">
+                        <nil key="title"/>
+                        <textField key="titleView" opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Entry777" textAlignment="center" minimumFontSize="17" id="Un3-g4-JMA">
+                            <rect key="frame" x="180" y="7" width="240" height="30"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
+                            <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="numberPad" returnKeyType="go" enablesReturnKeyAutomatically="YES"/>
+                            <connections>
+                                <outlet property="delegate" destination="6TA-qZ-399" id="g8R-7Z-ZmF"/>
+                            </connections>
+                        </textField>
                         <connections>
                             <outlet property="rightBarButtonItem" destination="BBx-6F-NYQ" id="WvS-VA-m1N"/>
                         </connections>
                     </navigationItem>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
                     <nil key="simulatedBottomBarMetrics"/>
+                    <connections>
+                        <outlet property="tfTitle" destination="Un3-g4-JMA" id="EFd-CE-vtG"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="FPK-Kw-Pzi" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

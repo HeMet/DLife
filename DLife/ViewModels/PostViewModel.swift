@@ -23,6 +23,7 @@ class PostViewModel: BaseViewModel {
     var comments: ObservableArray<DLComment> = []
     
     var onEntryChanged: (() -> ())?
+    var onAlert: (String -> ())?
     
     private let api = DevsLifeAPI()
     
@@ -32,13 +33,16 @@ class PostViewModel: BaseViewModel {
     }
     
     func nextRandomPost() {
-        api.getRandomEntry { [unowned self] result in
-            switch result {
-            case .OK(let box):
-                self.currentEntry = EntryViewModel(entry: box.value)
-            case .Error(let error):
-                println(error)
-            }
+        api.getRandomEntry(handleApiResult)
+    }
+    
+    func handleApiResult(result: ApiResult<DLEntry>) {
+        switch result {
+        case .OK(let box):
+            currentEntry = EntryViewModel(entry: box.value)
+        case .Error(let error):
+            println(error)
+            onAlert?("Не удалось загрузить запись.")
         }
     }
     
@@ -51,6 +55,10 @@ class PostViewModel: BaseViewModel {
                 println(error)
             }
         }
+    }
+    
+    func showPost(id: String) {
+        api.getEntry(id, callback: handleApiResult)
     }
     
     deinit {
