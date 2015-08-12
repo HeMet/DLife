@@ -65,6 +65,9 @@
                         </barButtonItem>
                     </navigationItem>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
+                    <connections>
+                        <outlet property="scCategories" destination="Nvf-4r-rPv" id="pzF-5K-n4I"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="joq-S4-fUy" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -171,18 +174,10 @@
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" editable="NO" usesAttributedText="YES" translatesAutoresizingMaskIntoConstraints="NO" id="2pn-29-iAI">
-                                <rect key="frame" x="156" y="68" width="288" height="240"/>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" editable="NO" text="http://developerslife.ru" textAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="2pn-29-iAI">
+                                <rect key="frame" x="208" y="89" width="184" height="37"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <attributedString key="attributedText">
-                                    <fragment>
-                                        <string key="content">Мобильный клиент для  http://developerslife.ru  Разработан при помощи MVVMKit: https://github.com/HeMet/MVVMKit  Исходники: https://github.com/HeMet/DLife  Иконки взяты с http://icons8.com</string>
-                                        <attributes>
-                                            <font key="NSFont" size="17" name="HelveticaNeue"/>
-                                            <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural"/>
-                                        </attributes>
-                                    </fragment>
-                                </attributedString>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                 <dataDetectorType key="dataDetectorTypes" link="YES"/>
                             </textView>
@@ -192,19 +187,91 @@
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Мобильный клиент для" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ska-QY-ob1">
+                                <rect key="frame" x="206" y="68" width="188" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Разработан при помощи MVVMKit:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="A53-l6-oLE">
+                                <rect key="frame" x="160" y="134" width="280" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Исходники:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yUm-dX-dp1">
+                                <rect key="frame" x="253" y="200" width="94" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Иконки взяты с" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RdZ-Ff-X49">
+                                <rect key="frame" x="237" y="266" width="126" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" editable="NO" text="https://github.com/HeMet/DLife" textAlignment="right" translatesAutoresizingMaskIntoConstraints="NO" id="ST2-iy-ohF">
+                                <rect key="frame" x="174" y="221" width="253" height="37"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                <dataDetectorType key="dataDetectorTypes" link="YES"/>
+                            </textView>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" editable="NO" text="http://icons8.com" textAlignment="right" translatesAutoresizingMaskIntoConstraints="NO" id="AYj-OX-EtU">
+                                <rect key="frame" x="228" y="287" width="145" height="37"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                <dataDetectorType key="dataDetectorTypes" link="YES"/>
+                            </textView>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" editable="NO" text="https://github.com/HeMet/MVVMKit" textAlignment="right" translatesAutoresizingMaskIntoConstraints="NO" id="ZFh-kq-SE6">
+                                <rect key="frame" x="158" y="155" width="284" height="37"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                <dataDetectorType key="dataDetectorTypes" link="YES"/>
+                            </textView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstAttribute="centerX" secondItem="2pn-29-iAI" secondAttribute="centerX" id="8cC-e5-6TU"/>
-                            <constraint firstItem="2pn-29-iAI" firstAttribute="top" secondItem="Tbr-ve-rTp" secondAttribute="bottom" constant="8" id="Cg9-sS-MCe"/>
+                            <constraint firstItem="ST2-iy-ohF" firstAttribute="top" secondItem="yUm-dX-dp1" secondAttribute="bottom" id="4Hk-zU-UVy"/>
+                            <constraint firstAttribute="centerX" secondItem="A53-l6-oLE" secondAttribute="centerX" id="7oP-oW-lwV"/>
+                            <constraint firstItem="RdZ-Ff-X49" firstAttribute="top" secondItem="ST2-iy-ohF" secondAttribute="bottom" constant="8" id="DVW-jz-Znd"/>
+                            <constraint firstAttribute="centerX" secondItem="yUm-dX-dp1" secondAttribute="centerX" id="Dt3-im-CSF"/>
+                            <constraint firstAttribute="centerX" secondItem="AYj-OX-EtU" secondAttribute="centerX" id="Eh3-Jm-Vlj"/>
                             <constraint firstItem="65N-3n-pdh" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="sRa-ga-5gZ" secondAttribute="leadingMargin" id="Hl2-CX-Ba0"/>
                             <constraint firstItem="Tbr-ve-rTp" firstAttribute="top" secondItem="ygI-yg-OUv" secondAttribute="bottom" constant="8" id="Ih4-DL-8Jk"/>
+                            <constraint firstAttribute="centerX" secondItem="RdZ-Ff-X49" secondAttribute="centerX" id="PnA-Zw-DRo"/>
+                            <constraint firstItem="ST2-iy-ohF" firstAttribute="top" secondItem="ZFh-kq-SE6" secondAttribute="bottom" constant="8" id="Qv4-0p-cfu"/>
                             <constraint firstItem="qKp-FT-RZe" firstAttribute="top" secondItem="65N-3n-pdh" secondAttribute="bottom" constant="20" id="UnK-pK-yLB"/>
+                            <constraint firstAttribute="centerX" secondItem="ZFh-kq-SE6" secondAttribute="centerX" id="X32-lS-IKP"/>
+                            <constraint firstItem="AYj-OX-EtU" firstAttribute="top" secondItem="RdZ-Ff-X49" secondAttribute="bottom" id="ZrZ-xh-7dZ"/>
+                            <constraint firstItem="2pn-29-iAI" firstAttribute="top" secondItem="ska-QY-ob1" secondAttribute="bottom" id="ZtH-K6-3qG"/>
+                            <constraint firstAttribute="centerX" secondItem="ST2-iy-ohF" secondAttribute="centerX" id="a28-yr-NSX"/>
+                            <constraint firstAttribute="centerX" secondItem="ska-QY-ob1" secondAttribute="centerX" id="dF2-Ir-DUj"/>
                             <constraint firstAttribute="centerX" secondItem="Tbr-ve-rTp" secondAttribute="centerX" id="gcb-v0-RCr"/>
+                            <constraint firstItem="A53-l6-oLE" firstAttribute="top" secondItem="2pn-29-iAI" secondAttribute="bottom" constant="8" id="lp2-26-OiY"/>
                             <constraint firstAttribute="centerX" secondItem="65N-3n-pdh" secondAttribute="centerX" id="mqr-P0-6bY"/>
+                            <constraint firstItem="ska-QY-ob1" firstAttribute="top" secondItem="Tbr-ve-rTp" secondAttribute="bottom" constant="8" id="p4z-hN-nLT"/>
+                            <constraint firstItem="ZFh-kq-SE6" firstAttribute="top" secondItem="A53-l6-oLE" secondAttribute="bottom" id="uHn-fY-w8j"/>
+                            <constraint firstItem="yUm-dX-dp1" firstAttribute="top" secondItem="ZFh-kq-SE6" secondAttribute="bottom" constant="8" id="xd7-VD-leL"/>
                             <constraint firstAttribute="trailingMargin" relation="greaterThanOrEqual" secondItem="65N-3n-pdh" secondAttribute="trailing" id="yAE-AO-u3V"/>
+                            <constraint firstAttribute="centerX" secondItem="2pn-29-iAI" secondAttribute="centerX" id="zYa-77-o7w"/>
                         </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="Qv4-0p-cfu"/>
+                            </mask>
+                        </variation>
                     </view>
+                    <connections>
+                        <outlet property="lblCopyright" destination="65N-3n-pdh" id="7l6-wb-dX4"/>
+                        <outlet property="lblIconProvidedBy" destination="RdZ-Ff-X49" id="f7c-oK-3nM"/>
+                        <outlet property="lblMobileApp" destination="ska-QY-ob1" id="H2P-7v-yNM"/>
+                        <outlet property="lblPoweredBy" destination="A53-l6-oLE" id="jVk-h3-Nzh"/>
+                        <outlet property="lblSources" destination="yUm-dX-dp1" id="heG-qy-ctj"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="s8b-yC-V76" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

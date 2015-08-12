@@ -12,6 +12,8 @@ import MVVMKit
 class FeedViewController : UITableViewController, SBViewForViewModel, UITableViewDelegate {
     static let sbInfo = (sbID: "Main", viewID: "FeedViewController")
     
+    @IBOutlet weak var scCategories: UISegmentedControl!
+    
     var viewModel : FeedViewModel!
     var adapter: TableViewAdapter!
     
@@ -43,7 +45,15 @@ class FeedViewController : UITableViewController, SBViewForViewModel, UITableVie
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        localize()
         bindToViewModel()
+    }
+    
+    func localize() {
+        scCategories.setTitle("latest".localized, forSegmentAtIndex: 0)
+        scCategories.setTitle("best".localized, forSegmentAtIndex: 1)
+        scCategories.setTitle("hot".localized, forSegmentAtIndex: 2)
+        scCategories.setTitle("favorite".localized, forSegmentAtIndex: 3)
     }
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
