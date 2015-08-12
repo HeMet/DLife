@@ -60,8 +60,4 @@ class PostViewModel: BaseViewModel {
     func showPost(id: String) {
         api.getEntry(id, callback: handleApiResult)
     }
-    
-    deinit {
-        println("dispose EVM")
-    }
 }

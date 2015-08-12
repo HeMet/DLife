@@ -40,7 +40,6 @@ class PostViewController: UITableViewController, SBViewForViewModel, UITableView
         adapter.setData(viewModel.currentEntry, forSectionAtIndex: 0)
         adapter.setData(commentsProxy, forSectionAtIndex: 1)
         adapter.setTitle("Комментарии:", forSection: .Header, atIndex: 1)
-        println("end update")
         adapter.endUpdate()
         
         viewModel.onEntryChanged = { [unowned self] in
@@ -63,7 +62,6 @@ class PostViewController: UITableViewController, SBViewForViewModel, UITableView
             let copy = ObservableArray(observableArray: comments)
             htmlTexts = map(copy) { parseCommentText($0.text) }
             commentsProxy.replaceAll(comments)
-            println("end update (comments)")
             adapter.endUpdate()
         }
     }
@@ -123,9 +121,5 @@ class PostViewController: UITableViewController, SBViewForViewModel, UITableView
     
     func handleAlert(text: String) {
         UIAlertView(title: nil, message: text, delegate: nil, cancelButtonTitle: "Ну, ок...").show()
-    }
-    
-    deinit {
-        println("dispose EVC")
     }
 }
