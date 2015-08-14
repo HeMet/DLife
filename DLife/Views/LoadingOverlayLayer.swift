@@ -34,12 +34,12 @@ class LoadingOverlayLayer: CAShapeLayer {
         setup()
     }
     
-    override init(layer: AnyObject!) {
+    override init(layer: AnyObject) {
         super.init(layer: layer)
         setup()
     }
 
-    required init(coder aDecoder: NSCoder) {
+    required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         setup()
     }
@@ -56,10 +56,10 @@ class LoadingOverlayLayer: CAShapeLayer {
         let center = CGPoint(x: bounds.width / 2, y: bounds.height / 2)
         let offset = CGFloat(M_PI) / 2
         
-        var bigRadius = circleRadius + kCircleWidth
-        var bigCircle = UIBezierPath(roundedRect: CGRect(x: center.x - bigRadius, y: center.y - bigRadius, width: bigRadius * 2, height: bigRadius * 2), cornerRadius: bigRadius)
+        let bigRadius = circleRadius + kCircleWidth
+        let bigCircle = UIBezierPath(roundedRect: CGRect(x: center.x - bigRadius, y: center.y - bigRadius, width: bigRadius * 2, height: bigRadius * 2), cornerRadius: bigRadius)
         
-        var circlePath = UIBezierPath()
+        let circlePath = UIBezierPath()
         if (percentage < 0.01) {
             circlePath.addArcWithCenter(center, radius: circleRadius, startAngle: 0, endAngle: CGFloat(2 * M_PI), clockwise: true)
         } else {
@@ -68,7 +68,7 @@ class LoadingOverlayLayer: CAShapeLayer {
             circlePath.moveToPoint(center)
         }
         
-        var bgRect = UIBezierPath(rect: bounds)
+        let bgRect = UIBezierPath(rect: bounds)
         bgRect.appendPath(bigCircle)
         bgRect.appendPath(circlePath)
         bgRect.usesEvenOddFillRule = true

@@ -108,7 +108,7 @@ class PostViewController: UITableViewController, SBViewForViewModel, UITableView
     }
     
     func textFieldShouldReturn(textField: UITextField) -> Bool {
-        if let idNumber = tfTitle.text.toInt() {
+        if let idNumber = Int(tfTitle.text) {
             textField.text = "Entry\(idNumber)"
             textField.resignFirstResponder()
             

@@ -14,7 +14,7 @@ func async(qos: qos_class_t, callback: () -> ()) {
 }
 
 func backgroundTask(callback: () -> ()) {
-    async(QOS_CLASS_BACKGROUND, callback)
+    async(QOS_CLASS_BACKGROUND, callback: callback)
 }
 
 func uiTask(callack: () -> ()) {

@@ -41,7 +41,7 @@ class PostViewModel: BaseViewModel {
         case .OK(let box):
             currentEntry = EntryViewModel(entry: box.value)
         case .Error(let error):
-            println(error)
+            print(error)
             onAlert?("Не удалось загрузить запись.")
         }
     }
@@ -52,7 +52,7 @@ class PostViewModel: BaseViewModel {
             case .OK(let box):
                 self.comments.replaceAll(box.value)
             case .Error(let error):
-                println(error)
+                print(error)
             }
         }
     }

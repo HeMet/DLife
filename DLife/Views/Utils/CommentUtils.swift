@@ -10,12 +10,15 @@ import UIKit
 
 func parseCommentText(text: String) -> NSAttributedString? {
     let htmlString = "<span style=\"font-family: HelveticaNeue-Medium; font-size: 17\">\(text)</span>"
-    return NSAttributedString(
-        data: htmlString.dataUsingEncoding(NSUTF8StringEncoding)!,
-        options: [
-            NSDocumentTypeDocumentAttribute: NSHTMLTextDocumentType,
-            NSCharacterEncodingDocumentAttribute: NSUTF8StringEncoding
-        ],
-        documentAttributes: nil,
-        error: nil)
+    do {
+        return try NSAttributedString(
+            data: htmlString.dataUsingEncoding(NSUTF8StringEncoding)!,
+            options: [
+                NSDocumentTypeDocumentAttribute: NSHTMLTextDocumentType,
+                NSCharacterEncodingDocumentAttribute: NSUTF8StringEncoding
+            ],
+            documentAttributes: nil)
+    } catch _ {
+        return nil
+    }
 }

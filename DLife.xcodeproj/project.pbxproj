@@ -33,8 +33,6 @@
 		848FF1CC1B27550300E53884 /* ReactiveCocoa.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 848FF1CA1B27550300E53884 /* ReactiveCocoa.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		848FF1CE1B27553900E53884 /* Result.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 848FF1CD1B27553900E53884 /* Result.framework */; };
 		848FF1CF1B27553900E53884 /* Result.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 848FF1CD1B27553900E53884 /* Result.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		848FF1D11B27554000E53884 /* Box.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 848FF1D01B27554000E53884 /* Box.framework */; };
-		848FF1D21B27554000E53884 /* Box.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 848FF1D01B27554000E53884 /* Box.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		84A3A9751B680B8B0093BCAE /* EntryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84A3A9741B680B8B0093BCAE /* EntryViewModel.swift */; };
 		84A57FDF1B2F54A7009A560E /* EntryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84A57FDE1B2F54A7009A560E /* EntryView.swift */; };
 		84A57FE31B2F5DAE009A560E /* Cartography.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 84A57FE21B2F5DAE009A560E /* Cartography.framework */; };
@@ -74,7 +72,6 @@
 				848FF1CF1B27553900E53884 /* Result.framework in Embed Frameworks */,
 				84A57FE41B2F5DAE009A560E /* Cartography.framework in Embed Frameworks */,
 				848FF1C81B27549500E53884 /* MVVMKit.framework in Embed Frameworks */,
-				848FF1D21B27554000E53884 /* Box.framework in Embed Frameworks */,
 				845E5DB51B2B135500D44299 /* WebImage.framework in Embed Frameworks */,
 				84619B9B1B2AEEBA000954CB /* Alamofire.framework in Embed Frameworks */,
 				848FF1CC1B27550300E53884 /* ReactiveCocoa.framework in Embed Frameworks */,
@@ -107,7 +104,6 @@
 		848FF1C61B27549500E53884 /* MVVMKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = MVVMKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		848FF1CA1B27550300E53884 /* ReactiveCocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ReactiveCocoa.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		848FF1CD1B27553900E53884 /* Result.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Result.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		848FF1D01B27554000E53884 /* Box.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Box.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		84A3A9741B680B8B0093BCAE /* EntryViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = EntryViewModel.swift; path = ViewModels/EntryViewModel.swift; sourceTree = "<group>"; };
 		84A57FDE1B2F54A7009A560E /* EntryView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = EntryView.swift; path = Views/EntryView.swift; sourceTree = "<group>"; };
 		84A57FE21B2F5DAE009A560E /* Cartography.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Cartography.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -140,7 +136,6 @@
 				848FF1C71B27549500E53884 /* MVVMKit.framework in Frameworks */,
 				845E5DB41B2B135500D44299 /* WebImage.framework in Frameworks */,
 				84A57FE31B2F5DAE009A560E /* Cartography.framework in Frameworks */,
-				848FF1D11B27554000E53884 /* Box.framework in Frameworks */,
 				848FF1CB1B27550300E53884 /* ReactiveCocoa.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -237,7 +232,6 @@
 				84A57FE21B2F5DAE009A560E /* Cartography.framework */,
 				845E5DB31B2B135500D44299 /* WebImage.framework */,
 				84619B991B2AEEBA000954CB /* Alamofire.framework */,
-				848FF1D01B27554000E53884 /* Box.framework */,
 				848FF1CD1B27553900E53884 /* Result.framework */,
 				848FF1CA1B27550300E53884 /* ReactiveCocoa.framework */,
 				848FF1C61B27549500E53884 /* MVVMKit.framework */,
@@ -344,7 +338,9 @@
 		B67781461AC2B86A00D41721 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0620;
+				LastSwiftMigration = 0700;
+				LastSwiftUpdateCheck = 0700;
+				LastUpgradeCheck = 0700;
 				ORGANIZATIONNAME = GitHub;
 				TargetAttributes = {
 					B677814D1AC2B86A00D41721 = {
@@ -498,6 +494,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
@@ -567,6 +564,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_BUNDLE_IDENTIFIER = org.hemet.dlife;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -581,6 +579,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_BUNDLE_IDENTIFIER = org.hemet.dlife;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;
@@ -599,6 +598,7 @@
 				);
 				INFOPLIST_FILE = DLifeTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.github.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/DLife.app/DLife";
 			};
@@ -614,6 +614,7 @@
 				);
 				INFOPLIST_FILE = DLifeTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.github.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/DLife.app/DLife";
 			};

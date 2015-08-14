@@ -11,7 +11,7 @@ import Alamofire
 import Box
 import WebImage
 
-enum FeedCategory: Printable {
+enum FeedCategory: CustomStringConvertible {
     case Latest, Hot, Top, Favorite
     
     var description: String {

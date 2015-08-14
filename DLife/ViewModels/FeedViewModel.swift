@@ -43,7 +43,7 @@ class FeedViewModel: ViewModel {
                 }
                 self.onDataChanged?()
             case .Error(let error):
-                println(error)
+                print(error)
             }
         }
     }

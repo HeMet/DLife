@@ -25,7 +25,7 @@ class FavoritesManager {
     
     private var favoritesFolder: String {
         let paths = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)
-        let docDir = paths[0] as! String
+        let docDir = paths[0] 
         return docDir + "/" + FAVORITES_FOLDER
     }
     
@@ -35,18 +35,22 @@ class FavoritesManager {
     
     func ensureFavoritesFolder() {
         let paths = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)
-        let docDir = paths[0] as! String
+        let docDir = paths[0] 
         let favDir = docDir + "/" + FAVORITES_FOLDER
         
-        println(favDir)
+        print(favDir)
         
         let fm = NSFileManager()
         if !fm.fileExistsAtPath(favDir) {
-            println("create fav dir")
+            print("create fav dir")
             var error: NSError? = nil
-            fm.createDirectoryAtPath(favDir, withIntermediateDirectories: true, attributes: nil, error: &error)
+            do {
+                try fm.createDirectoryAtPath(favDir, withIntermediateDirectories: true, attributes: nil)
+            } catch let error1 as NSError {
+                error = error1
+            }
             if let error = error {
-                println("Cann't create favorites directory: \(error)")
+                print("Cann't create favorites directory: \(error)")
             }
         }
     }
@@ -55,14 +59,14 @@ class FavoritesManager {
         let fm = NSFileManager()
         if fm.fileExistsAtPath(favoritesStorage) {
             if let data = NSData(contentsOfFile: favoritesStorage) {
-                var error: NSError? = nil
-                if let json = NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions.allZeros, error: &error) as? [[String: AnyObject]] {
+                let error: NSError? = nil
+                if let json = NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions()) as? [[String: AnyObject]] {
                     return (json ).map { DLEntry(json: $0) }
                 } else {
-                    println("deserialization error: \(error)")
+                    print("deserialization error: \(error)")
                 }
             } else {
-                println("error while reading favorites")
+                print("error while reading favorites")
             }
         }
         
@@ -73,32 +77,42 @@ class FavoritesManager {
         let favs = favorites.map { $0.toJson() }
         
         var error: NSError? = nil
-        let json = NSJSONSerialization.dataWithJSONObject(favs, options: NSJSONWritingOptions.PrettyPrinted, error: &error)
+        let json: NSData?
+        do {
+            json = try NSJSONSerialization.dataWithJSONObject(favs, options: NSJSONWritingOptions.PrettyPrinted)
+        } catch let error1 as NSError {
+            error = error1
+            json = nil
+        }
         
         if let json = json {
-            json.writeToFile(favoritesStorage, options: NSDataWritingOptions.allZeros, error: &error)
+            do {
+                try json.writeToFile(favoritesStorage, options: NSDataWritingOptions())
+            } catch let error1 as NSError {
+                error = error1
+            }
             
             if let error = error {
-                println("writing error: \(error)")
+                print("writing error: \(error)")
             }
         } else {
-            println("Error while serializing to json: \(error)")
+            print("Error while serializing to json: \(error)")
         }
     }
     
     func add(entry: DLEntry) {
-        if find(favorites, entry) == nil {
+        if favorites.indexOf(entry) == nil {
             favorites.append(entry)
         }
     }
     
     func remove(entry: DLEntry) {
-        if let index = find(favorites, entry) {
+        if let index = favorites.indexOf(entry) {
             favorites.removeAtIndex(index)
         }
     }
     
     func isFavorite(entry: DLEntry) -> Bool {
-        return contains(favorites, entry)
+        return favorites.contains(entry)
     }
 }
