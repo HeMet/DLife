@@ -34,8 +34,8 @@ class FeedViewModel: ViewModel {
         let append = feedToken.isUsed
         api.getEntries(feedToken) { result in
             switch result {
-            case .OK(let boxedData):
-                let newVMs = boxedData.value.map { EntryViewModel(entry: $0) }
+            case .OK(let entries):
+                let newVMs = entries.map { EntryViewModel(entry: $0) }
                 if append {
                     self.entries.extend(newVMs)
                 } else {

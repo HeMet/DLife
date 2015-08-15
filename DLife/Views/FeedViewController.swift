@@ -9,7 +9,7 @@
 import UIKit
 import MVVMKit
 
-class FeedViewController : UITableViewController, SBViewForViewModel, UITableViewDelegate {
+class FeedViewController : UITableViewController, SBViewForViewModel {
     static let sbInfo = (sbID: "Main", viewID: "FeedViewController")
     
     @IBOutlet weak var scCategories: UISegmentedControl!
@@ -29,7 +29,7 @@ class FeedViewController : UITableViewController, SBViewForViewModel, UITableVie
             let row = max(paths[0].row - 1, 0)
             self.adapter.performAfterUpdate {
                 if (row > 0) {
-                    var path = NSIndexPath(forRow: row, inSection: 0)
+                    let path = NSIndexPath(forRow: row, inSection: 0)
                     $0.scrollToRowAtIndexPath(path, atScrollPosition: UITableViewScrollPosition.Bottom, animated: true)
                 } else {
                     $0.scrollRectToVisible(CGRect(x: 0, y: 0, width: 1, height: 1), animated: true)

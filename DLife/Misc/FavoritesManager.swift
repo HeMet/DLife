@@ -59,11 +59,12 @@ class FavoritesManager {
         let fm = NSFileManager()
         if fm.fileExistsAtPath(favoritesStorage) {
             if let data = NSData(contentsOfFile: favoritesStorage) {
-                let error: NSError? = nil
-                if let json = NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions()) as? [[String: AnyObject]] {
-                    return (json ).map { DLEntry(json: $0) }
-                } else {
-                    print("deserialization error: \(error)")
+                do {
+                    if let json = try NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions()) as? [[String: AnyObject]] {
+                        return json.map { DLEntry(json: $0) }
+                    }
+                } catch _ {
+                    print("deserialization error")
                 }
             } else {
                 print("error while reading favorites")

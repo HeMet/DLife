@@ -9,7 +9,7 @@
 import UIKit
 import MVVMKit
 
-class PostViewController: UITableViewController, SBViewForViewModel, UITableViewDelegate, UITextFieldDelegate {
+class PostViewController: UITableViewController, SBViewForViewModel, UITextFieldDelegate {
     static let sbInfo = (sbID: "Main", viewID: "PostViewController")
     
     let cbTag = "PostViewController"
@@ -60,7 +60,7 @@ class PostViewController: UITableViewController, SBViewForViewModel, UITableView
             commentsProxy.removeAll(false)
         case .End:
             let copy = ObservableArray(observableArray: comments)
-            htmlTexts = map(copy) { parseCommentText($0.text) }
+            htmlTexts = copy.map { parseCommentText($0.text) }
             commentsProxy.replaceAll(comments)
             adapter.endUpdate()
         }
@@ -108,7 +108,9 @@ class PostViewController: UITableViewController, SBViewForViewModel, UITableView
     }
     
     func textFieldShouldReturn(textField: UITextField) -> Bool {
-        if let idNumber = Int(tfTitle.text) {
+        guard let text = tfTitle.text else { return false }
+        
+        if let idNumber = Int(text) {
             textField.text = "Entry\(idNumber)"
             textField.resignFirstResponder()
             

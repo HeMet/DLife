@@ -8,7 +8,6 @@
 
 import Foundation
 import Alamofire
-import Box
 import WebImage
 
 enum FeedCategory: CustomStringConvertible {
@@ -26,7 +25,7 @@ enum FeedCategory: CustomStringConvertible {
 
 enum ApiResult<T> {
     case Error(NSError)
-    case OK(Box<T>)
+    case OK(T)
 }
 
 extension NSError {
@@ -79,21 +78,23 @@ class DevsLifeAPI {
             "pageSize": token.pageSize,
             "types": "gif"
         ]
-        Alamofire.request(.GET, "http://developerslife.ru/\(token.category)/\(token.page)", parameters: params, encoding: .URL).responseJSON { (_, _, data, error) in
-            if  let data = data as? [String: AnyObject],
+        
+        Alamofire.request(.GET, "http://developerslife.ru/\(token.category)/\(token.page)", parameters: params, encoding: .URL).responseJSON { (_, _, result) in
+
+            if  let data = result.value as? [String: AnyObject],
                 let result = data["result"] as? [[String: AnyObject]],
                 let totalCount = data["totalCount"] as? Int {
                     
-                    var entries = map(result) {
+                    let entries = result.map {
                         DLEntry(json: $0)
                     }
                     token.total = totalCount
                     token.next()
                     
                     self.loadPreviews(entries) {
-                        callback(.OK(Box(entries)))
+                        callback(.OK(entries))
                     }
-            } else if let error = error {
+            } else if let error = result.error {
                 callback(.Error(error))
             }
         }
@@ -102,9 +103,9 @@ class DevsLifeAPI {
     func loadPreviews(entries: [DLEntry], callback: () -> ()) {
         let downloader = SDWebImageDownloader.sharedDownloader()
         downloader.setSuspended(true)
-        var counter = Counter(entries.count)
+        let counter = Counter(entries.count)
         for entry in entries {
-            downloader.downloadImageWithURL(NSURL(string: entry.previewURL), options: SDWebImageDownloaderOptions.allZeros, progress: { _ in }) { image, _, error, _ in
+            downloader.downloadImageWithURL(NSURL(string: entry.previewURL), options: SDWebImageDownloaderOptions(), progress: { _ in }) { image, _, error, _ in
                 dispatch_async(dispatch_get_main_queue()) {
                     if (error == nil) {
                         entry.imgSize = (Float(image.size.width), Float(image.size.height))
@@ -132,15 +133,15 @@ class DevsLifeAPI {
             "json": "true",
             "types": "gif"
         ]
-        Alamofire.request(.GET, "http://developerslife.ru/random", parameters: params, encoding: .URL).responseJSON { (_, _, data, error) in
-            if  let result = data as? [String: AnyObject] {
+        Alamofire.request(.GET, "http://developerslife.ru/random", parameters: params, encoding: .URL).responseJSON { (_, _, result) in
+            if  let result = result.value as? [String: AnyObject] {
                     
-                var entry = DLEntry(json: result)
+                let entry = DLEntry(json: result)
                 
                 self.loadPreviews([entry]) {
-                    callback(.OK(Box(entry)))
+                    callback(.OK(entry))
                 }
-            } else if let error = error {
+            } else if let error = result.error {
                 callback(.Error(error))
             }
         }
@@ -151,20 +152,20 @@ class DevsLifeAPI {
             "json": "true",
             "types": "gif"
         ]
-        Alamofire.request(.GET, "http://developerslife.ru/\(id)", parameters: params, encoding: .URL).responseJSON { (_, _, data, error) in
-            if  let result = data as? [String: AnyObject] {
+        Alamofire.request(.GET, "http://developerslife.ru/\(id)", parameters: params, encoding: .URL).responseJSON { (_, _, result) in
+            if  let result = result.value as? [String: AnyObject] {
                 
-                if let error = result["error"] as? String {
+                if let _ = result["error"] as? String {
                     let nsError = NSError.newApiError(.NotFound)
                     callback(.Error(nsError))
                 } else {
-                    var entry = DLEntry(json: result)
+                    let entry = DLEntry(json: result)
                     
                     self.loadPreviews([entry]) {
-                        callback(.OK(Box(entry)))
+                        callback(.OK(entry))
                     }
                 }
-            } else if let error = error {
+            } else if let error = result.error {
                 callback(.Error(error))
             }
         }
@@ -174,16 +175,16 @@ class DevsLifeAPI {
         let params: [String: AnyObject] = [
             "json": "true",
         ]
-        Alamofire.request(.GET, "http://developerslife.ru/comments/entry/\(entryId)", parameters: params, encoding: .URL).responseJSON { (_, _, data, error) in
-            if  let data = data as? [String: AnyObject],
+        Alamofire.request(.GET, "http://developerslife.ru/comments/entry/\(entryId)", parameters: params, encoding: .URL).responseJSON { (_, _, result) in
+            if  let data = result.value as? [String: AnyObject],
                 let result = data["comments"] as? [[String: AnyObject]] {
             
-                var comments = map(result) {
+                let comments = result.map {
                     DLComment(json: $0)
                 }
                 
-                callback(.OK(Box(comments)))
-            } else if let error = error {
+                callback(.OK(comments))
+            } else if let error = result.error {
                 callback(.Error(error))
             }
         }

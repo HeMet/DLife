@@ -15,19 +15,19 @@ class BaseViewModel : ViewModel {
     var active = MutableProperty<Bool>(false)
     
     lazy var didBecomeActiveSignal: SignalProducer<ViewModel, NoError> = {
-        return self.active.producer |> filter { $0 } |> map { _ in self as ViewModel }
+        return self.active.producer.filter { $0 }.map { _ in self as ViewModel }
     }()
     
     lazy var didBecomeInactiveSignal: SignalProducer<ViewModel, NoError> = {
-        return self.active.producer |> filter { !$0 } |> map { _ in self as ViewModel }
+        return self.active.producer.filter { !$0 }.map { _ in self as ViewModel }
     }()
     
     func forwardSignalWhileActive<T, E>(signal: SignalProducer<T, E>) -> SignalProducer<T, E> {
-        return signal |> forwardWhile(self.active.producer)
+        return signal.forwardWhile(self.active.producer)
     }
     
     func throttleSignalWhileInactive<T, E>(signal: SignalProducer<T, E>) -> SignalProducer<T, E> {
-        return signal |> throttle(interval: 1)(_while: self.active.producer |> map { !$0 })
+        return signal.throttle(1, onScheduler: QueueScheduler(), passingTest: { _ in !self.active.value })
     }
     
     var onDisposed: ViewModelEventHandler?

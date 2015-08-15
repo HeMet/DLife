@@ -217,7 +217,7 @@ class EntryView: UIView, ViewForViewModel {
             
             imgPicture.sd_setImageWithURL(NSURL(string: self.viewModel.entry.gifURL),
                 placeholderImage: preview,
-                options: SDWebImageOptions(0),
+                options: SDWebImageOptions(rawValue: 0),
                 progress: { receivedSize, expectedSize in
                     self.loadingPercentage = CGFloat(receivedSize * 100 / expectedSize)
                 }) { _ in

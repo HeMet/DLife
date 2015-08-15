@@ -38,8 +38,8 @@ class PostViewModel: BaseViewModel {
     
     func handleApiResult(result: ApiResult<DLEntry>) {
         switch result {
-        case .OK(let box):
-            currentEntry = EntryViewModel(entry: box.value)
+        case .OK(let entry):
+            currentEntry = EntryViewModel(entry: entry)
         case .Error(let error):
             print(error)
             onAlert?("Не удалось загрузить запись.")
@@ -49,8 +49,8 @@ class PostViewModel: BaseViewModel {
     func loadComments() {
         api.getComments(currentEntry.entry.id) { [unowned self] result in
             switch result {
-            case .OK(let box):
-                self.comments.replaceAll(box.value)
+            case .OK(let comments):
+                self.comments.replaceAll(comments)
             case .Error(let error):
                 print(error)
             }

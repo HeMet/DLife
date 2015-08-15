@@ -9,7 +9,7 @@
 import Foundation
 import WebImage
 
-extension SDImageCacheType: Printable {
+extension SDImageCacheType: CustomStringConvertible {
     public var description: String {
         switch (self) {
         case .None: return "None"
