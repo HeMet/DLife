@@ -9,7 +9,9 @@
 import Foundation
 import MVVMKit
 
-class FeedViewModel: ViewModel {
+class FeedViewModel: ViewModelWithID {
+    var uniqueID = String.unique()
+    
     var entries = ObservableArray<EntryViewModel>()
     var feedToken = FeedToken(category: .Latest, pageSize: 10)
     var category = FeedCategory.Latest {
@@ -18,8 +20,6 @@ class FeedViewModel: ViewModel {
             loadEntries()
         }
     }
-    
-    var onDisposed: ViewModelEventHandler?
     
     func loadEntries() {
         if feedToken.category == .Favorite {
@@ -37,7 +37,7 @@ class FeedViewModel: ViewModel {
             case .OK(let entries):
                 let newVMs = entries.map { EntryViewModel(entry: $0) }
                 if append {
-                    self.entries.extend(newVMs)
+                    self.entries.appendContentsOf(newVMs)
                 } else {
                     self.entries.replaceAll(newVMs)
                 }
@@ -63,10 +63,6 @@ class FeedViewModel: ViewModel {
     
     func showAbout() {
         GoTo.about(sender: self)(AboutViewModel())
-    }
-    
-    func dispose() {
-        onDisposed?(self)
     }
     
     var onDataChanged: (() -> ())?

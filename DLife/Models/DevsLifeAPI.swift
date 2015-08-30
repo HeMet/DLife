@@ -24,7 +24,7 @@ enum FeedCategory: CustomStringConvertible {
 }
 
 enum ApiResult<T> {
-    case Error(NSError)
+    case Error(ErrorType)
     case OK(T)
 }
 

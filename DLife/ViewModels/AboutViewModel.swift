@@ -9,14 +9,6 @@
 import Foundation
 import MVVMKit
 
-class AboutViewModel: ViewModel {
-    var onDisposed: ViewModelEventHandler?
-    
-    func dispose() {
-        onDisposed?(self)
-    }
-    
-    deinit {
-        dispose()
-    }
+class AboutViewModel: ViewModelWithID {
+    var uniqueID = String.unique()
 }

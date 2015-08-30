@@ -34,7 +34,7 @@ class PostViewController: UITableViewController, SBViewForViewModel, UITextField
             cell.updateConstraintsIfNeeded()
         }
         
-        commentsProxy = ObservableArray(observableArray: viewModel.comments)
+        commentsProxy = ObservableArray(data: viewModel.comments.innerCollection)
         
         adapter.beginUpdate()
         adapter.setData(viewModel.currentEntry, forSectionAtIndex: 0)
@@ -50,16 +50,17 @@ class PostViewController: UITableViewController, SBViewForViewModel, UITextField
         viewModel.comments.onBatchUpdate.register(cbTag, listener: unowned(self, PostViewController.parseCommentsTextAndUpdate))
         tfTitle.text = "Entry\(viewModel.currentEntry.entry.id)"
         
-        viewModel.onAlert = handleAlert
+        viewModel.onAlert = unowned(self, PostViewController.handleAlert)
     }
     
     func parseCommentsTextAndUpdate(comments: ObservableArray<DLComment>, phase: UpdatePhase) {
         switch phase {
         case .Begin:
             adapter.beginUpdate()
-            commentsProxy.removeAll(false)
+            commentsProxy.removeAll(keepCapacity: false)
         case .End:
-            let copy = ObservableArray(observableArray: comments)
+            let copy = ObservableArray(data: comments.innerCollection)
+            
             htmlTexts = copy.map { parseCommentText($0.text) }
             commentsProxy.replaceAll(comments)
             adapter.endUpdate()

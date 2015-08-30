@@ -8,11 +8,15 @@
 
 import Foundation
 
-class DLComment {
+class DLComment: Equatable {
     var id: Int!
     var entryId: Int!
     var text: String!
     var date: String!
     var voteCount: Int!
     var authorName: String!
+}
+
+func ==(l: DLComment, r: DLComment) -> Bool {
+    return l.id == r.id
 }
