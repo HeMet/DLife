@@ -10,7 +10,7 @@ import Foundation
 import MVVMKit
 
 class FeedViewModel: ViewModelWithID {
-    var uniqueID = String.unique()
+    let uniqueID = String.unique()
     
     var entries = ObservableArray<EntryViewModel>()
     var feedToken = FeedToken(category: .Latest, pageSize: 10)
@@ -58,11 +58,11 @@ class FeedViewModel: ViewModelWithID {
     
     func showEntryAtIndex(index: Int) {
         let entry = entries[index].entry
-        GoTo.post(sender: self)(PostViewModel(entry: entry))
+        GoTo.post(sender: !self)(PostViewModel(entry: entry))
     }
     
     func showAbout() {
-        GoTo.about(sender: self)(AboutViewModel())
+        GoTo.about(sender: !self)(AboutViewModel())
     }
     
     var onDataChanged: (() -> ())?

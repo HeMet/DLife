@@ -10,7 +10,6 @@ import Foundation
 import MVVMKit
 
 class AboutViewController: UIViewController, SBViewForViewModel {
-    static let sbInfo = (sbID: "Main", viewID: "AboutViewController")
     
     @IBOutlet weak var lblMobileApp: UILabel!
     @IBOutlet weak var lblPoweredBy: UILabel!

@@ -9,8 +9,7 @@
 import UIKit
 import MVVMKit
 
-class CommentCellView: UITableViewCell, ViewForViewModel, BindableCellView {
-    static var CellIdentifier = "CommentCellView"
+class CommentCellView: UITableViewCell, CellViewForViewModel {
     
     var viewModel: DLComment!
     

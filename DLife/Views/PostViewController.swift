@@ -10,7 +10,6 @@ import UIKit
 import MVVMKit
 
 class PostViewController: UITableViewController, SBViewForViewModel, UITextFieldDelegate {
-    static let sbInfo = (sbID: "Main", viewID: "PostViewController")
     
     let cbTag = "PostViewController"
     
@@ -44,7 +43,7 @@ class PostViewController: UITableViewController, SBViewForViewModel, UITextField
         
         viewModel.onEntryChanged = { [unowned self] in
             self.adapter.setData(self.viewModel.currentEntry, forSectionAtIndex: 0)
-            self.navigationItem.title = "Entry\(self.viewModel.currentEntry.entry.id)"
+            self.tfTitle.text = "Entry\(self.viewModel.currentEntry.entry.id)"
         }
         
         viewModel.comments.onBatchUpdate.register(cbTag, listener: unowned(self, PostViewController.parseCommentsTextAndUpdate))

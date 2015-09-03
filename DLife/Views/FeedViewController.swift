@@ -10,7 +10,6 @@ import UIKit
 import MVVMKit
 
 class FeedViewController : UITableViewController, SBViewForViewModel {
-    static let sbInfo = (sbID: "Main", viewID: "FeedViewController")
     
     @IBOutlet weak var scCategories: UISegmentedControl!
     

@@ -13,9 +13,7 @@ import WebImage
 // TODO: Maybe it would be useful to declare ViewForViewModelHolder protocol
 // to specify what viewModel should be binded to child view.
 
-class EntryCellView: UITableViewCell, ViewForViewModel, BindableCellView, NibSource {
-    static let CellIdentifier = "EntryCellView"
-    static let NibIdentifier = "EntryCellView"
+class EntryCellView: UITableViewCell, CellViewForViewModel, NibSource {
 
     @IBOutlet weak var entryView: EntryView!
     

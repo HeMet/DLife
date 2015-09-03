@@ -10,7 +10,7 @@ import UIKit
 import MVVMKit
 
 struct GoTo {
-    static let root = present(!FeedViewController.self).withinNavView().asRoot()
-    static let post = present(!PostViewController.self).withTransition(Transitions.show)
-    static let about = present(!AboutViewController.self).withTransition(Transitions.show)
+    static let root = NavigationView.with { FeedViewController.bindedTo($0) }.presented().asRoot()
+    static let post = PostViewController.presented().withTransition(Transitions.show)
+    static let about = AboutViewController.presented().withTransition(Transitions.show)
 }
