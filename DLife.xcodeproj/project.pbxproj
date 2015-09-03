@@ -29,10 +29,6 @@
 		848393821B7BC8AA00A4D057 /* StringExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 848393811B7BC8AA00A4D057 /* StringExtension.swift */; };
 		848FF1C71B27549500E53884 /* MVVMKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 848FF1C61B27549500E53884 /* MVVMKit.framework */; };
 		848FF1C81B27549500E53884 /* MVVMKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 848FF1C61B27549500E53884 /* MVVMKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		848FF1CB1B27550300E53884 /* ReactiveCocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 848FF1CA1B27550300E53884 /* ReactiveCocoa.framework */; };
-		848FF1CC1B27550300E53884 /* ReactiveCocoa.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 848FF1CA1B27550300E53884 /* ReactiveCocoa.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		848FF1CE1B27553900E53884 /* Result.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 848FF1CD1B27553900E53884 /* Result.framework */; };
-		848FF1CF1B27553900E53884 /* Result.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 848FF1CD1B27553900E53884 /* Result.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		84A3A9751B680B8B0093BCAE /* EntryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84A3A9741B680B8B0093BCAE /* EntryViewModel.swift */; };
 		84A57FDF1B2F54A7009A560E /* EntryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84A57FDE1B2F54A7009A560E /* EntryView.swift */; };
 		84A57FE31B2F5DAE009A560E /* Cartography.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 84A57FE21B2F5DAE009A560E /* Cartography.framework */; };
@@ -71,12 +67,10 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				848FF1CF1B27553900E53884 /* Result.framework in Embed Frameworks */,
 				84A57FE41B2F5DAE009A560E /* Cartography.framework in Embed Frameworks */,
 				848FF1C81B27549500E53884 /* MVVMKit.framework in Embed Frameworks */,
 				845E5DB51B2B135500D44299 /* WebImage.framework in Embed Frameworks */,
 				84619B9B1B2AEEBA000954CB /* Alamofire.framework in Embed Frameworks */,
-				848FF1CC1B27550300E53884 /* ReactiveCocoa.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -104,8 +98,6 @@
 		848393811B7BC8AA00A4D057 /* StringExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = StringExtension.swift; path = Misc/StringExtension.swift; sourceTree = "<group>"; };
 		848393831B7BCA8200A4D057 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/DLife.strings; sourceTree = "<group>"; };
 		848FF1C61B27549500E53884 /* MVVMKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = MVVMKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		848FF1CA1B27550300E53884 /* ReactiveCocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ReactiveCocoa.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		848FF1CD1B27553900E53884 /* Result.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Result.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		84A3A9741B680B8B0093BCAE /* EntryViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EntryViewModel.swift; sourceTree = "<group>"; };
 		84A57FDE1B2F54A7009A560E /* EntryView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = EntryView.swift; path = Views/EntryView.swift; sourceTree = "<group>"; };
 		84A57FE21B2F5DAE009A560E /* Cartography.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Cartography.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -135,12 +127,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				848FF1CE1B27553900E53884 /* Result.framework in Frameworks */,
 				84619B9A1B2AEEBA000954CB /* Alamofire.framework in Frameworks */,
 				848FF1C71B27549500E53884 /* MVVMKit.framework in Frameworks */,
 				845E5DB41B2B135500D44299 /* WebImage.framework in Frameworks */,
 				84A57FE31B2F5DAE009A560E /* Cartography.framework in Frameworks */,
-				848FF1CB1B27550300E53884 /* ReactiveCocoa.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -238,8 +228,6 @@
 				84A57FE21B2F5DAE009A560E /* Cartography.framework */,
 				845E5DB31B2B135500D44299 /* WebImage.framework */,
 				84619B991B2AEEBA000954CB /* Alamofire.framework */,
-				848FF1CD1B27553900E53884 /* Result.framework */,
-				848FF1CA1B27550300E53884 /* ReactiveCocoa.framework */,
 				848FF1C61B27549500E53884 /* MVVMKit.framework */,
 				B67781501AC2B86A00D41721 /* DLife */,
 				B67781661AC2B86A00D41721 /* DLifeTests */,

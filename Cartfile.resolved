@@ -1,6 +1,4 @@
 github "Alamofire/Alamofire" "64a004472c16313d04671518ef03ef4b72293dbc"
 github "robb/Cartography" "36eeb22dbf7db7eff066389e9dc19e47a7266071"
-github "antitypical/Result" "932ac1aabf6d881ead74c4e6911d1271e95d2859"
+github "HeMet/MVVMKit" "50ac028459e9210fdbea915c97066893b0d2b62e"
 github "HeMet/SDWebImage" "20534a333b3b3218913bb96caed33b080f341d53"
-github "ReactiveCocoa/ReactiveCocoa" "494fbbdd392b24fafc40347630c4add7e31f4460"
-github "HeMet/MVVMKit" "15acea8800bcd7a479e9cf7216fe197c96d7e0c5"

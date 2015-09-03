@@ -11,12 +11,6 @@
       location = "group:Carthage/Checkouts/Alamofire/Alamofire.xcodeproj">
    </FileRef>
    <FileRef
-      location = "group:Carthage/Checkouts/Result/Result.xcodeproj">
-   </FileRef>
-   <FileRef
-      location = "group:Carthage/Checkouts/ReactiveCocoa/ReactiveCocoa.xcodeproj">
-   </FileRef>
-   <FileRef
       location = "group:Carthage/Checkouts/MVVMKit/MVVMKit.xcodeproj">
    </FileRef>
    <FileRef
