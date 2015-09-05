@@ -101,6 +101,11 @@ class DevsLifeAPI {
     }
     
     func loadPreviews(entries: [DLEntry], callback: () -> ()) {
+        if entries.isEmpty {
+            callback()
+            return
+        }
+        
         let downloader = SDWebImageDownloader.sharedDownloader()
         downloader.setSuspended(true)
         let counter = Counter(entries.count)
