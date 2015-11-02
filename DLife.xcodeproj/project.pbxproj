@@ -45,6 +45,7 @@
 		84C51CF91B372B45007C8108 /* PostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84C51CF81B372B45007C8108 /* PostViewController.swift */; };
 		84C51CFB1B372C07007C8108 /* CommentCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84C51CFA1B372C07007C8108 /* CommentCellView.swift */; };
 		84C847D81B86624A00E4EA92 /* CollectionExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84C847D71B86624A00E4EA92 /* CollectionExtensions.swift */; };
+		84E0BE991B9B29E70044FEEA /* UIKitRACExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E0BE981B9B29E70044FEEA /* UIKitRACExtensions.swift */; settings = {ASSET_TAGS = (); }; };
 		84E698F81B930FC900658A39 /* DLCommentViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E698F71B930FC900658A39 /* DLCommentViewModel.swift */; settings = {ASSET_TAGS = (); }; };
 		B67781541AC2B86A00D41721 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B67781531AC2B86A00D41721 /* AppDelegate.swift */; };
 		B67781591AC2B86A00D41721 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B67781571AC2B86A00D41721 /* Main.storyboard */; };
@@ -117,6 +118,7 @@
 		84C51CF81B372B45007C8108 /* PostViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PostViewController.swift; path = Views/PostViewController.swift; sourceTree = "<group>"; };
 		84C51CFA1B372C07007C8108 /* CommentCellView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CommentCellView.swift; path = Views/CommentCellView.swift; sourceTree = "<group>"; };
 		84C847D71B86624A00E4EA92 /* CollectionExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollectionExtensions.swift; sourceTree = "<group>"; };
+		84E0BE981B9B29E70044FEEA /* UIKitRACExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIKitRACExtensions.swift; sourceTree = "<group>"; };
 		84E698F71B930FC900658A39 /* DLCommentViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DLCommentViewModel.swift; sourceTree = "<group>"; };
 		B677814E1AC2B86A00D41721 /* DLife.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DLife.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B67781521AC2B86A00D41721 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -220,6 +222,7 @@
 				847BD2C11B65374300F3BC0E /* FavoritesManager.swift */,
 				848393811B7BC8AA00A4D057 /* StringExtension.swift */,
 				84C847D71B86624A00E4EA92 /* CollectionExtensions.swift */,
+				84E0BE981B9B29E70044FEEA /* UIKitRACExtensions.swift */,
 			);
 			path = Misc;
 			sourceTree = "<group>";
@@ -432,6 +435,7 @@
 				84A57FE91B30A2BF009A560E /* PostViewModel.swift in Sources */,
 				845E5DE11B2B3DB400D44299 /* DevsLifeAPI.swift in Sources */,
 				84619B961B2ADC7E000954CB /* FeedViewController.swift in Sources */,
+				84E0BE991B9B29E70044FEEA /* UIKitRACExtensions.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

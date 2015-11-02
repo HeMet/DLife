@@ -8,6 +8,7 @@
 
 import UIKit
 import MVVMKit
+import ReactiveCocoa
 
 class FeedViewController : UITableViewController, SBViewForViewModel {
     
@@ -20,6 +21,8 @@ class FeedViewController : UITableViewController, SBViewForViewModel {
         let tv = view as! UITableView
         tv.estimatedRowHeight = 150
         tv.rowHeight = UITableViewAutomaticDimension
+        
+        viewModel.category <~ scCategories.rac_selectedSegmentIndex.producer.skip(1).map(FeedCategory.init)
         
         adapter = TableViewAdapter(tableView: tv)
         adapter.cells.register(EntryCellView.self)
@@ -74,23 +77,24 @@ class FeedViewController : UITableViewController, SBViewForViewModel {
         }
     }
     
-    @IBAction func handleCategoryChanged(sender: AnyObject) {
-        let sc = sender as! UISegmentedControl
-        switch sc.selectedSegmentIndex {
-        case 0:
-            viewModel.category = .Latest
-        case 1:
-            viewModel.category = .Top
-        case 2:
-            viewModel.category = .Hot
-        case 3:
-            viewModel.category = .Favorite
-        default:
-            break
-        }
-    }
-    
     @IBAction func handleAboutTapped(sender: UIBarButtonItem) {
         viewModel.showAbout()
+    }
+}
+
+private extension FeedCategory {
+    init(integerValue: Int) {
+        switch integerValue {
+        case 0:
+            self = .Latest
+        case 1:
+            self = .Top
+        case 2:
+            self = .Hot
+        case 3:
+            self = .Favorite
+        default:
+            self = .Latest
+        }
     }
 }

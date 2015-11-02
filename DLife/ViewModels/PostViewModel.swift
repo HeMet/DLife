@@ -8,28 +8,26 @@
 
 import Foundation
 import MVVMKit
+import ReactiveCocoa
 
 class PostViewModel: BaseViewModel {
     
-    var data = ObservableArray<AnyObject>()
-    
-    var currentEntry: EntryViewModel {
-        didSet {
-            onEntryChanged?()
-            loadComments()
-        }
-    }
-    
     var comments: ObservableArray<DLComment> = []
     
-    var onEntryChanged: (() -> ())?
+    var currentEntry: MutableProperty<EntryViewModel>
+
     var onAlert: (String -> ())?
     
     private let api = DevsLifeAPI()
     
     init(entry: DLEntry) {
-        currentEntry = EntryViewModel(entry: entry)
+        currentEntry = MutableProperty(EntryViewModel(entry: entry))
+        
         super.init()
+        
+        currentEntry.didSet { [unowned self] _ in
+            self.loadComments()
+        }
     }
     
     func nextRandomPost() {
@@ -39,7 +37,7 @@ class PostViewModel: BaseViewModel {
     func handleApiResult(result: ApiResult<DLEntry>) {
         switch result {
         case .OK(let entry):
-            currentEntry = EntryViewModel(entry: entry)
+            currentEntry.value = EntryViewModel(entry: entry)
         case .Error(let error):
             print(error)
             onAlert?("Не удалось загрузить запись.")
@@ -47,7 +45,7 @@ class PostViewModel: BaseViewModel {
     }
     
     func loadComments() {
-        api.getComments(currentEntry.entry.id) { [unowned self] result in
+        api.getComments(currentEntry.value.entry.id) { [unowned self] result in
             switch result {
             case .OK(let comments):
                 self.comments.replaceAll(comments)

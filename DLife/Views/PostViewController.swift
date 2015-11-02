@@ -8,6 +8,7 @@
 
 import UIKit
 import MVVMKit
+import ReactiveCocoa
 
 class PostViewController: UITableViewController, SBViewForViewModel, UITextFieldDelegate {
     
@@ -20,6 +21,10 @@ class PostViewController: UITableViewController, SBViewForViewModel, UITextField
     
     var htmlTexts: [NSAttributedString?] = []
     var commentsProxy: ObservableArray<DLComment> = []
+    
+    deinit {
+        print("post deinit")
+    }
     
     func bindToViewModel() {
         adapter = TableViewAdapter(tableView: tableView, rowHeightMode: .TemplateCell)
@@ -36,18 +41,17 @@ class PostViewController: UITableViewController, SBViewForViewModel, UITextField
         commentsProxy = ObservableArray(data: viewModel.comments.innerCollection)
         
         adapter.beginUpdate()
-        adapter.setData(viewModel.currentEntry, forSectionAtIndex: 0)
+        adapter.setData(viewModel.currentEntry.value, forSectionAtIndex: 0)
         adapter.setData(commentsProxy, forSectionAtIndex: 1)
         adapter.setTitle("Комментарии:", forSection: .Header, atIndex: 1)
         adapter.endUpdate()
         
-        viewModel.onEntryChanged = { [unowned self] in
-            self.adapter.setData(self.viewModel.currentEntry, forSectionAtIndex: 0)
-            self.tfTitle.text = "Entry\(self.viewModel.currentEntry.entry.id)"
-        }
-        
         viewModel.comments.onBatchUpdate.register(cbTag, listener: unowned(self, PostViewController.parseCommentsTextAndUpdate))
-        tfTitle.text = "Entry\(viewModel.currentEntry.entry.id)"
+        
+        viewModel.currentEntry.didSet { [unowned self] vm in
+            self.adapter.setData(vm, forSectionAtIndex: 0)
+            self.tfTitle.text = "Entry\(vm.entry.id)"
+        }
         
         viewModel.onAlert = unowned(self, PostViewController.handleAlert)
     }
@@ -111,7 +115,6 @@ class PostViewController: UITableViewController, SBViewForViewModel, UITextField
         guard let text = tfTitle.text else { return false }
         
         if let idNumber = Int(text) {
-            textField.text = "Entry\(idNumber)"
             textField.resignFirstResponder()
             
             viewModel.showPost("\(idNumber)")

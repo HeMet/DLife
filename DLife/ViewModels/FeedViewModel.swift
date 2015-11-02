@@ -8,16 +8,20 @@
 
 import Foundation
 import MVVMKit
+import ReactiveCocoa
 
 class FeedViewModel: ViewModelWithID {
     let uniqueID = String.unique()
     
     var entries = ObservableArray<EntryViewModel>()
     var feedToken = FeedToken(category: .Latest, pageSize: 10)
-    var category = FeedCategory.Latest {
-        didSet {
-            feedToken = FeedToken(category: category, pageSize: 10)
-            loadEntries()
+    
+    let category = MutableProperty<FeedCategory>(.Latest)
+    
+    init() {
+        category.didSet { [unowned self] value in
+            self.feedToken = FeedToken(category: value, pageSize: 10)
+            self.loadEntries()
         }
     }
     
@@ -41,7 +45,6 @@ class FeedViewModel: ViewModelWithID {
                 } else {
                     self.entries.replaceAll(newVMs)
                 }
-                self.onDataChanged?()
             case .Error(let error):
                 print(error)
             }
@@ -50,7 +53,7 @@ class FeedViewModel: ViewModelWithID {
     
     func loadFavorites() {
         if (!feedToken.isUsed) {
-            let favs = FavoritesManager.sharedInstance.favorites.map { EntryViewModel(entry: $0) }
+            let favs = FavoritesManager.sharedInstance.favorites.map(EntryViewModel.init)
             entries.replaceAll(favs)
             feedToken.next()
         }
@@ -64,6 +67,4 @@ class FeedViewModel: ViewModelWithID {
     func showAbout() {
         GoTo.about(sender: !self)(AboutViewModel())
     }
-    
-    var onDataChanged: (() -> ())?
 }
