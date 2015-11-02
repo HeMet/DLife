@@ -110,12 +110,12 @@ extension NSObject {
 }
 
 extension MutableProperty {
-    public convenience init(_ initialValue: T, onChanges: T -> ()) {
+    public convenience init(_ initialValue: Value, onChanges: Value -> ()) {
         self.init(initialValue)
         producer.startWithNext(onChanges)
     }
     
-    func didSet(handler: T -> ()) {
+    func didSet(handler: Value -> ()) {
         producer.startWithNext(handler)
     }
 }
