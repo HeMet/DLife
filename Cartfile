@@ -1,4 +1,4 @@
 github "HeMet/SDWebImage" "master"
-github "robb/Cartography" "swift-2.0"
-github "Alamofire/Alamofire" "swift-2.0"
+github "robb/Cartography" ~> 0.6
+github "Alamofire/Alamofire" ~> 2.0
 github "HeMet/MVVMKit" "swift-2.0"
